@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pokemon 125</string>
+    <string name="action_settings">Settings</string>
+    <string name="move_4">Move 4</string>
+    <string name="move_2">Move 2</string>
+    <string name="move_1">Move 1</string>
+    <string name="move_2">Move 2</string>
+    <string name="fight">Fight</string>
+    <string name="cheat">Cheat?</string>
+    <string name="run">run</string>
+    <string name="pokemon">Pokemon</string>
+</resources>
