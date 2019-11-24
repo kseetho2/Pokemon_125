@@ -9,4 +9,6 @@
     <string name="cheat">Cheat?</string>
     <string name="run">run</string>
     <string name="pokemon">Pokemon</string>
+    <string name="move_3">move 3</string>
+    <string name="click_to_start">Click to Start</string>
 </resources>
