@@ -5,5 +5,4 @@ package com.example.pokemon125;
  * if we don't have enough we will come up with our own.
  */
 public class Pokemon {
-    public class
 }

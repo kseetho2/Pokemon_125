@@ -47,12 +47,12 @@
             android:layout_width="91dp"
             android:layout_height="77dp"
             android:text="@string/fight"
-            app:layout_constraintBottom_toTopOf="@+id/switch"
+            app:layout_constraintBottom_toTopOf="@+id/switchP"
             app:layout_constraintEnd_toStartOf="@+id/cheat"
             app:layout_constraintStart_toEndOf="@+id/moveTR" />
 
         <Button
-            android:id="@+id/switch"
+            android:id="@+id/switchP"
             android:layout_width="wrap_content"
             android:layout_height="77dp"
             android:text="@string/pokemon"

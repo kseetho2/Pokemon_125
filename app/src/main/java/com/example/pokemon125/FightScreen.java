@@ -25,7 +25,7 @@ public class FightScreen extends AppCompatActivity {
     }
     public int setMoveToButton(int move) {
         PokeApi request = new PokeApiClient();
-        PokemonMove attack = request.getMove();
+        //PokemonMove attack = request.getMove();
         Button moveTL;
         Button moveTR;
         Button moveBL;
@@ -34,6 +34,7 @@ public class FightScreen extends AppCompatActivity {
         moveTR = findViewById(R.id.moveTR);
         moveBL = findViewById(R.id.moveBL);
         moveBR = findViewById(R.id.moveBR);
+        return 0; //filler
     }
 
     /**
@@ -44,5 +45,6 @@ public class FightScreen extends AppCompatActivity {
     public int getMove() {
         PokeApi request = new PokeApiClient();
         Move retrieve = request.getMove(1);
+        return 0; //filler
     }
 }
