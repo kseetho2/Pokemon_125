@@ -8,10 +8,14 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.view.FrameMetrics;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
+        mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
+            public void onClick(View v) {
+                setContentView(R.layout.exposition); //enter exposition
+                Button enterTeamSelect = findViewById(R.id.enterTeamSelect);
+                enterTeamSelect.setOnClickListener(new View.OnClickListener() { //tap button
+                    public void onClick(View v) {
+                        //pokemon select screen
+                    }
+                };
+            }
+        });
         /*
         setSupportActionBar(toolbar);
         fab.setOnClickListener(new View.OnClickListener() {

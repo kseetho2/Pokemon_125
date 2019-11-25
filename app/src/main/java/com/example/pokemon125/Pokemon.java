@@ -5,4 +5,10 @@ package com.example.pokemon125;
  * if we don't have enough we will come up with our own.
  */
 public class Pokemon {
+    private int id;
+    private int speed;
+    private int health;
+    public Pokemon(int number, int move1, int move2, int move3, int move4) {
+
+    }
 }
