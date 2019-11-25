@@ -29,18 +29,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
+
         mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
             public void onClick(View v) {
                 setContentView(R.layout.exposition); //enter exposition
                 Button enterTeamSelect = findViewById(R.id.enterTeamSelect);
+
                 enterTeamSelect.setOnClickListener(new View.OnClickListener() { //tap button
                     public void onClick(View v) {
                         setContentView(R.layout.switch_pokemon);
-
                         Button enterFightScene = findViewById(R.id.enterFightScreen);
+
                         enterFightScene.setOnClickListener(new View.OnClickListener() {
                            public void onClick(View v) {
-                               setContentView(findViewById(R.id.exposition));
+                               setContentView(R.layout.fight_screen);
                            }
                         });
                     }
