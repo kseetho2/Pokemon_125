@@ -1,6 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource"
+    android:layout_centerHorizontal="true">
 
-</LinearLayout>
+    <Space
+        android:id="@+id/emptySpace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="25dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:layout_toRightOf="@+id/userPokemonList">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/staffName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="DANIEL"
+                android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/HP1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="HP: 100/100" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/staffName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="AJAY"
+                android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/HP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="HP: 100/100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/staffName3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="NIKHIL"
+                android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/HP3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="HP: 100/100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/staffName4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="BEN"
+                android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/HP4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="HP: 100/100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/staffName5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="STAFF 5"
+                android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/HP5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="HP: 100/100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/staffName6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="STAFF 6"
+                android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/HP6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="HP: 100/100" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/enterFightScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="I CHOOSE YOU!"
+            android:layout_marginTop="210dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:text="YOUR POKEMON"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/userPokemonList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="25dp">
+
+        <RadioButton
+            android:id="@+id/pokemon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="pokemonClicked"
+            android:padding="5dp"
+            android:text="EEVEE" />
+
+        <RadioButton
+            android:id="@+id/pokemon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pokemonClicked"
+            android:padding="5dp"
+            android:text="GARCHOMP" />
+
+        <RadioButton
+            android:id="@+id/pokemon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pokemonClicked"
+            android:padding="5dp"
+            android:text="GRENINJA" />
+
+        <RadioButton
+            android:id="@+id/pokemon4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pokemonClicked"
+            android:padding="5dp"
+            android:text="VOLTORB" />
+
+        <RadioButton
+            android:id="@+id/pokemon5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pokemonClicked"
+            android:padding="5dp"
+            android:text="POKEMON 5" />
+
+        <RadioButton
+            android:id="@+id/pokemon6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pokemonClicked"
+            android:padding="5dp"
+            android:text="POKEMON 6" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="154dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="@android:dimen/thumbnail_width"
+            android:text="\nTHE 'CHALLEN'GER WILL BE USING _______. \n\nWHICH POKEMON WILL YOU CHOOSE?"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</RelativeLayout>

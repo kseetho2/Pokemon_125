@@ -16,8 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RadioButton selectedPokemon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +35,16 @@ public class MainActivity extends AppCompatActivity {
                 Button enterTeamSelect = findViewById(R.id.enterTeamSelect);
                 enterTeamSelect.setOnClickListener(new View.OnClickListener() { //tap button
                     public void onClick(View v) {
-                        //pokemon select screen
+                        setContentView(R.layout.switch_pokemon);
+
+                        Button enterFightScene = findViewById(R.id.enterFightScreen);
+                        enterFightScene.setOnClickListener(new View.OnClickListener() {
+                           public void onClick(View v) {
+                               setContentView(findViewById(R.id.exposition));
+                           }
+                        });
                     }
-                };
+                });
             }
         });
         /*
@@ -45,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
          */
+    }
+
+    public void pokemonClicked(View v) {
+        RadioGroup radioGroup = findViewById(R.id.userPokemonList);
+        int radioId = radioGroup.getCheckedRadioButtonId();
+
+        selectedPokemon = findViewById(radioId);
+
+        Toast.makeText(this, "Selected Pokemon: " + selectedPokemon.getText(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
