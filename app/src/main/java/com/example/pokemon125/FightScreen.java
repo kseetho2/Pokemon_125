@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.webkit.WebResourceRequest;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,9 +24,10 @@ public class FightScreen extends AppCompatActivity {
         setContentView(R.layout.fight_screen);    //This line add the view to your activity
 
     }
-    public int setMoveToButton(int move) {
+    public int setMoveToButton(String pokemonName) {
         PokeApi request = new PokeApiClient();
         //PokemonMove attack = request.getMove();
+        /**
         Button moveTL;
         Button moveTR;
         Button moveBL;
@@ -34,6 +36,13 @@ public class FightScreen extends AppCompatActivity {
         moveTR = findViewById(R.id.moveTR);
         moveBL = findViewById(R.id.moveBL);
         moveBR = findViewById(R.id.moveBR);
+         */
+        Pokemon yourChoice = new Pokemon(pokemonName);
+        TextView moveTL = findViewById(R.id.moveTL);
+        TextView moveTR = findViewById(R.id.moveTR);
+        TextView moveBL = findViewById(R.id.moveBL);
+        TextView moveBR = findViewById(R.id.moveBR);
+
         return 0; //filler
     }
 
