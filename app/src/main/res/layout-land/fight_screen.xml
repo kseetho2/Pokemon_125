@@ -7,9 +7,113 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="600dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/geoffText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="50dp">
+
+                <TextView
+                    android:id="@+id/geoffFirstRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EKANS :L100"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/geoffSecondRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HP: 420/420" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/geoffVisual"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/geoffImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/image_test1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="700dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/playerVisual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/playerImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="gudeAvocado"
+                    app:srcCompat="@drawable/image_test2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/playerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/playerFirstRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FLUFFY :L100"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/playerSecondRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HP: 420/420" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/playerOptions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <Button
             android:id="@+id/moveBR"

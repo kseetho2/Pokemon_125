@@ -36,11 +36,18 @@
                 android:textColor="#708090" />
 
             <TextView
+                android:id="@+id/L1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=":L100" />
+
+            <TextView
                 android:id="@+id/HP1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="HP: 100/100" />
+                android:text="HP:  314/314" />
 
         </LinearLayout>
 
@@ -58,11 +65,18 @@
                 android:textColor="#708090" />
 
             <TextView
+                android:id="@+id/L2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=":L100" />
+
+            <TextView
                 android:id="@+id/HP2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="HP: 100/100" />
+                android:text="HP: 420/420" />
         </LinearLayout>
 
         <LinearLayout
@@ -79,11 +93,18 @@
                 android:textColor="#708090" />
 
             <TextView
+                android:id="@+id/L3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=":L100" />
+
+            <TextView
                 android:id="@+id/HP3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="HP: 100/100" />
+                android:text="HP: 348/348" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,11 +121,18 @@
                 android:textColor="#708090" />
 
             <TextView
+                android:id="@+id/L4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=":L100" />
+
+            <TextView
                 android:id="@+id/HP4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="HP: 100/100" />
+                android:text="HP: 284/284" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,15 +145,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:text="STAFF 5"
+                android:text="RIMA"
                 android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/L5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=":L100" />
 
             <TextView
                 android:id="@+id/HP5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="HP: 100/100" />
+                android:text="HP: 284/284" />
         </LinearLayout>
 
         <LinearLayout
@@ -140,6 +175,13 @@
                 android:padding="6dp"
                 android:text="STAFF 6"
                 android:textColor="#708090" />
+
+            <TextView
+                android:id="@+id/L6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=":L100" />
 
             <TextView
                 android:id="@+id/HP6"
@@ -189,7 +231,7 @@
             android:checked="true"
             android:onClick="pokemonClicked"
             android:padding="5dp"
-            android:text="EEVEE" />
+            android:text="FLUFFY" />
 
         <RadioButton
             android:id="@+id/pokemon2"
@@ -205,7 +247,7 @@
             android:layout_height="wrap_content"
             android:onClick="pokemonClicked"
             android:padding="5dp"
-            android:text="GRENINJA" />
+            android:text="NARUTO" />
 
         <RadioButton
             android:id="@+id/pokemon4"
@@ -221,7 +263,7 @@
             android:layout_height="wrap_content"
             android:onClick="pokemonClicked"
             android:padding="5dp"
-            android:text="POKEMON 5" />
+            android:text="RAMICU" />
 
         <RadioButton
             android:id="@+id/pokemon6"

@@ -24,16 +24,31 @@ import me.sargunvohra.lib.pokekotlin.model.PokemonMove;
 public class Pokemon {
     private int id;
     private int speed;
-    private int health;
+    private int totalHealth;
+    private int currentHealth;
+    private int attack;
+    private int specialAttack;
+    private int defense;
+    private int specialDefense;
     private int moveOneId;
     private int moveTwoId;
     private int moveThreeId;
     private int moveFourId;
-    private Pokemon one;
+    private Pokemon one; //what's one?
     private JSONObject data;
-    private String pokemon;
-    Pokemon(String input) {
-        pokemon = input;
+    private String name;
+
+
+    Pokemon(String input, int healthInput, int attackInput, int spAttackInput,
+            int defenseInput, int spDefenseInput, int speedInput) {
+        speed = speedInput;
+        currentHealth = healthInput;
+        totalHealth = healthInput;
+        attack = attackInput;
+        specialAttack = spAttackInput;
+        defense = defenseInput;
+        specialDefense = spDefenseInput;
+        name = input;
         if (input.equals("Voltorb")) {
             moveOneId = 435; //Discharge 435
             moveTwoId = 153; // Explosion 153
@@ -64,20 +79,29 @@ public class Pokemon {
     public void Pokemon(int number, int move1, int move2, int move3, int move4) {
 
     }
-    public String getMove1() {
-        return findMove(moveOneId);
-
-    }
+    public String getMove1() { return findMove(moveOneId); }
     public String getMove2() {
         return findMove(moveTwoId);
     }
     public String getMove3() {
         return findMove(moveThreeId);
     }
-    public String getMoveFourId() {
+    public String getMove4() {
         return findMove(moveFourId);
     }
+
+    public void setCurrentHealth(int input) { currentHealth = input; }
+    public int getCurrentHealth() { return currentHealth; }
+    public int getTotalHealth() { return totalHealth; }
+    public int getAttack() { return attack; };
+    public int getSpecialAttack() { return specialAttack; }
+    public int getDefense() { return defense; }
+    public int getSpecialDefense() { return specialDefense; }
+    public int getSpeed() { return speed; }
+    public String getName() { return name; }
+
     public String findMove(int input) {
+        getData();
         JSONArray array;
         try {
             array = data.getJSONArray("results");

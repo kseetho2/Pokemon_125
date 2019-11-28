@@ -37,7 +37,7 @@ public class FightScreen extends AppCompatActivity {
         moveBL = findViewById(R.id.moveBL);
         moveBR = findViewById(R.id.moveBR);
          */
-        Pokemon yourChoice = new Pokemon(pokemonName);
+        Pokemon yourChoice = new Pokemon("Fluffy", 314, 229, 218, 207, 251, 229);
         TextView moveTL = findViewById(R.id.moveTL);
         TextView moveTR = findViewById(R.id.moveTR);
         TextView moveBL = findViewById(R.id.moveBL);
