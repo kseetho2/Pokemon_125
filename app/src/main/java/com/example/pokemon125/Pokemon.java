@@ -38,7 +38,16 @@ public class Pokemon {
     private JSONObject data;
     private String name;
 
-
+    /**
+     * Constructor for the Pokemon.
+     * @param input Pokemon Name
+     * @param healthInput Pokemon HP
+     * @param attackInput Pokemon ATK
+     * @param spAttackInput Pokemon Special ATK
+     * @param defenseInput Pokemon DEF
+     * @param spDefenseInput Pokemon Special DEF
+     * @param speedInput Pokemon SPD
+     */
     Pokemon(String input, int healthInput, int attackInput, int spAttackInput,
             int defenseInput, int spDefenseInput, int speedInput) {
         speed = speedInput;
