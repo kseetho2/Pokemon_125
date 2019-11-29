@@ -1,15 +1,20 @@
 package com.example.pokemon125;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import me.sargunvohra.lib.pokekotlin.client.PokeApi;
+import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
 
 public class GameActivity extends AppCompatActivity {
     private Pokemon eevee;
@@ -22,6 +27,14 @@ public class GameActivity extends AppCompatActivity {
     private List<Pokemon> geoffLineup;
     private Pokemon userCurrent;
     private Pokemon geoffCurrent;
+
+    private PokeApi pokeApi = new PokeApiClient();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fight_screen);
+    }
 
     public GameActivity(String currentSelection) {
         eevee = new Pokemon("Fluffy", 314, 229, 218, 207, 251, 229);
@@ -65,7 +78,22 @@ public class GameActivity extends AppCompatActivity {
         move3.setText(userCurrent.getMove3());
         TextView move4 = findViewById(R.id.moveBR);
         move4.setText(userCurrent.getMove4());
+        /*
+        ConstraintLayout parent = findViewById(R.id.playerOptions);
+        //parent.removeAllViews();
+        View messageChunk = getLayoutInflater().inflate(R.layout.chunk_player_options, parent, false);
+        TextView move1 = messageChunk.findViewById(R.id.moveTL);
+        move1.setText(userCurrent.getMove1());
+        TextView move2 = messageChunk.findViewById(R.id.moveTR);
+        move2.setText(userCurrent.getMove2());
+        TextView move3 = messageChunk.findViewById(R.id.moveBL);
+        move3.setText(userCurrent.getMove3());
+        TextView move4 = messageChunk.findViewById(R.id.moveBR);
+        move4.setText(userCurrent.getMove4());
+        parent.addView(messageChunk);
+         */
     }
+
 
 
 }
