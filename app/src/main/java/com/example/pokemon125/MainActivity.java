@@ -1,13 +1,16 @@
 package com.example.pokemon125;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
@@ -50,13 +53,15 @@ import static com.android.volley.Request.Method.GET;
 public class MainActivity extends AppCompatActivity {
 
     private RadioButton selectedPokemon;
-    //private PokeApi pokeAPI;
+    private PokeApi pokeAPI;
+    private JSONObject object;
     //private JSONObject data;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final RequestQueue queue = Volley.newRequestQueue(this);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
 
         mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
@@ -75,20 +80,39 @@ public class MainActivity extends AppCompatActivity {
                                int radioId = radioGroup.getCheckedRadioButtonId();
                                selectedPokemon = findViewById(radioId);
 
-                               GameActivity gameLogic = new GameActivity((String) selectedPokemon.getText());
+                               //GameActivity gameLogic = new GameActivity();
 
-                               setContentView(R.layout.fight_screen);
-                               TextView move1 = findViewById(R.id.moveTL);
-                               TextView move2 = findViewById(R.id.moveBL);
-
-                               String appName = getResources().getString(R.string.move_3);
-                               move1.setText(appName);
-                               move1.setText(getResources().getString(R.string.eevee));
-
-                               PokeApi pokeApi = new PokeApiClient();
+                               //PokeApi pokeApi = new PokeApiClient();
                                Pokemon eevee = new Pokemon("Fluffy", 314, 229, 218, 207, 251, 229);
-                               move2.setText(pokeApi.getMove(247).getName());
+                               //connect();
+                               //move2.setText(pokeAPI.getMove(247).getName());
 
+                               String url = "https://pokeapi.co/api/v2/move/1";
+                               JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,  new Response.Listener<JSONObject>() {
+                                   public void onResponse(JSONObject response) {
+                                       object = response;
+                                   }
+                               }, new Response.ErrorListener() {
+                                   public void onErrorResponse(VolleyError error) {
+                                       System.out.println("That didn't work!");
+                                   }
+                               });
+                               queue.add(stringRequest);
+
+                               Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
+                               newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
+                               startActivity(newIntent);
+
+                               /*
+                               try {
+                                   int acc = (int) object.get("accuracy");
+                                   System.out.println(acc);
+
+                               } catch (JSONException e) {
+                                   //some exception handler code.
+                                   System.out.println("it didn't work :(");
+                               }
+                                */
 
                                //gameLogic.initialSetup();
 
@@ -120,63 +144,6 @@ public class MainActivity extends AppCompatActivity {
         });
          */
     }
-
-    /*
-    private void connect() {
-        String url = "https://pokeapi.co/api/v2/move"; //?limit=746
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        data = response;
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Oh no!", Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
-
-    public class TestThread implements Runnable {
-        public void run() {
-            PokeApi poke = new PokeApiClient();
-            poke.getMove(10);
-        }
-
-    }
-    private static class GetAPITask extends AsyncTask<String, Integer, String> {
-
-        private final PokeApi pokeApi;
-
-        GetAPITask(PokeApi api) {
-            this.pokeApi = api;
-        }
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        protected String doInBackground(String... params) {
-            try {
-                pokeApi.getMoveList(0,746);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return "API Created";
-        }
-
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-        }
-    }
-     */
 
     public void pokemonClicked(View v) {
         RadioGroup radioGroup = findViewById(R.id.userPokemonList);

@@ -115,13 +115,23 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
+        <TextView
+            android:id="@+id/messageBox"
+            android:layout_width="483dp"
+            android:layout_height="match_parent"
+            android:text="What will \nFLUFFY do?"
+            android:textSize="60sp"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteY="18dp" />
+
         <Button
             android:id="@+id/moveBR"
             android:layout_width="240dp"
             android:layout_height="78dp"
             android:text="@string/move_4"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/moveBL" />
+            app:layout_constraintStart_toEndOf="@+id/moveBL"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/moveBL"
@@ -129,7 +139,8 @@
             android:layout_height="77dp"
             android:text="@string/move_3"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/moveTL"
@@ -137,7 +148,8 @@
             android:layout_height="77dp"
             android:text="@string/move_1"
             app:layout_constraintBottom_toTopOf="@+id/moveBL"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/moveTR"
@@ -145,7 +157,8 @@
             android:layout_height="77dp"
             android:text="@string/move_2"
             app:layout_constraintBottom_toTopOf="@+id/moveBR"
-            app:layout_constraintStart_toEndOf="@+id/moveTL" />
+            app:layout_constraintStart_toEndOf="@+id/moveTL"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/fight"
