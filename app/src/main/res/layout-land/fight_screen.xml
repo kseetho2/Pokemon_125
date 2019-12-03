@@ -120,8 +120,8 @@
             android:layout_width="483dp"
             android:layout_height="match_parent"
             android:text="What will \nFLUFFY do?"
-            android:textSize="60sp"
             android:textAlignment="center"
+            android:textSize="40sp"
             tools:layout_editor_absoluteY="18dp" />
 
         <Button

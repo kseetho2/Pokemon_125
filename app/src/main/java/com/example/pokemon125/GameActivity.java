@@ -77,12 +77,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         six = new Pokemon("POKEMON 6", 420, 229, 218, 207, 251, 229); // NEED TO EDIT
         userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, six);
 
-        ekans = new Pokemon("Machine Project 0", 274, 240, 205, 196, 227, 229);
-        porygon = new Pokemon("Machine Project 1", 334, 240, 262, 295, 273, 196);
-        entei = new Pokemon("Machine Project 2", 434, 361, 295, 306, 273, 328);
-        mrMime = new Pokemon("Machine Project 3", 284, 207, 251, 328, 372, 306);
-        dialga = new Pokemon("Machine Project 4", 404, 372, 372, 438, 328, 306);
-        mewTwo = new Pokemon("Final Project", 416, 350, 306, 447, 306, 394);
+        ekans = new Pokemon("MACHINE PROJECT 0", 274, 240, 205, 196, 227, 229);
+        porygon = new Pokemon("MACHINE PROJECT 1", 334, 240, 262, 295, 273, 196);
+        entei = new Pokemon("MACHINE PROJECT 2", 434, 361, 295, 306, 273, 328);
+        mrMime = new Pokemon("MACHINE PROJECT 3", 284, 207, 251, 328, 372, 306);
+        dialga = new Pokemon("MACHINE PROJECT 4", 404, 372, 372, 438, 328, 306);
+        mewTwo = new Pokemon("FINAL PROJECT", 416, 350, 306, 447, 306, 394);
 
         geoffLineup = Arrays.asList(ekans, porygon, entei, mrMime, dialga, mewTwo);
         geoffPokeCount = 0;
@@ -150,6 +150,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         boolean wasMove = false;
+        final LinearLayout wholeScreen = findViewById(R.id.fight_Screen);
         switch (v.getId()) {
             case R.id.moveTL:
                 //Move 1 selected
@@ -176,52 +177,129 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 fightAction();
                 break;
             case R.id.cheat:
+                message.setText("Please refer to the cheating policies in the SYLLABUS.");
+                hideOptions();
+                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        playerOptions();
+                    }
+                });
                 break;
             case R.id.switchP:
                 updatePokemonSelection();
                 break;
             case R.id.run:
+                message.setText("Don't run! You can do it! Your TAs believe in you!");
+                hideOptions();
+                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        playerOptions();
+                    }
+                });
                 break;
         }
+
         if (wasMove) {
             geoffCurrent.setCurrentHealth(geoffCurrent.getCurrentHealth() - userDamage);
-            setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-            message.setText(userCurrent.getName() + " used " + userDamageName + "!");
-            showMessage();
-            hideOptions();
-
-            int geoffRandomAtk = (int) (Math.random() * 4) + 1;
-            setGeoffMoves();
-            if (geoffRandomAtk == 1) {
-                geoffDamageName = geoffMove1Name;
-                geoffDamage = geoffMove1Dmg;
-            } else if (geoffRandomAtk == 2) {
-                geoffDamageName = geoffMove2Name;
-                geoffDamage = geoffMove2Dmg;
-            } else if (geoffRandomAtk == 3) {
-                geoffDamageName = geoffMove3Name;
-                geoffDamage = geoffMove3Dmg;
-            } else if (geoffRandomAtk == 4) {
-                geoffDamageName = geoffMove4Name;
-                geoffDamage = geoffMove4Dmg;
-            }
-
-            final LinearLayout wholeScreen = findViewById(R.id.fight_Screen);
-            wholeScreen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
-                    userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
-                    setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+            if (checkGeoffFaint()) {
+                setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                message.setText(userCurrent.getName() + " used " + userDamageName + "! " + geoffCurrent.getName() + " fainted!");
+                showMessage();
+                hideOptions();
+                if (!checkUserWinner()) {
+                    geoffCurrent = geoffLineup.get(geoffPokeCount); //new Pokemon
                     wholeScreen.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            playerOptions();
+                            message.setText("The 'CHALLEN'GER will now use " + geoffCurrent.getName());
+                            setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    playerOptions();
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    //This doesn't work -- should be win screen. New layout?
+                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            setContentView(R.layout.end_screen);
                         }
                     });
                 }
-            });
+            } else { //battle continues
+                setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                message.setText(userCurrent.getName() + " used " + userDamageName + "!");
+                showMessage();
+                hideOptions();
+                int geoffRandomAtk = (int) (Math.random() * 4) + 1;
+                setGeoffMoves();
+                if (geoffRandomAtk == 1) {
+                    geoffDamageName = geoffMove1Name;
+                    geoffDamage = geoffMove1Dmg;
+                } else if (geoffRandomAtk == 2) {
+                    geoffDamageName = geoffMove2Name;
+                    geoffDamage = geoffMove2Dmg;
+                } else if (geoffRandomAtk == 3) {
+                    geoffDamageName = geoffMove3Name;
+                    geoffDamage = geoffMove3Dmg;
+                } else if (geoffRandomAtk == 4) {
+                    geoffDamageName = geoffMove4Name;
+                    geoffDamage = geoffMove4Dmg;
+                }
+
+                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
+                        if (checkFaint()) {
+                            //select a new pokemon
+                            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "! " + userCurrent.getName() + " fainted!");
+                            showMessage();
+                            hideOptions();
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                   playerOptions();
+                                }
+                            });
+                        } else {
+                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    playerOptions();
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
         }
+    }
+
+    private boolean checkGeoffFaint() {
+        if (geoffCurrent.getCurrentHealth() <= 0) {
+            geoffCurrent.setCurrentHealth(0);
+            geoffPokeCount++;
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkUserWinner() {
+        if (geoffPokeCount == 6) {
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -290,6 +368,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         text2.setText("HP: " + poke.getCurrentHealth() + "/" + poke.getTotalHealth());
     }
 
+    /**
+     * TO DO: need to edit this method a LOT! create a new layout specifically for THIS class!!
+     */
     private void updatePokemonSelection() {
         setContentView(R.layout.switch_pokemon);
         TextView HP1 = findViewById(R.id.HP1);
@@ -328,9 +409,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void checkFaint() {
+    private boolean checkFaint() {
         //check for 0 hp
         //call method that updates pokemon selection screen
+        return false;
     }
 
     /*
