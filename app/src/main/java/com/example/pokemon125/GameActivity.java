@@ -97,6 +97,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (currentSelection.equals("Pokemon 6")) { //TO BE DETERMINED
             userCurrent = eevee;
         }
+
         geoffCurrent = eevee; //TO BE DETERMINED
 
         fightOption.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +121,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         move2.setOnClickListener(this);
         move3.setOnClickListener(this);
         move4.setOnClickListener(this);
+        int geoffRandomAtk = (int) (Math.random() * 4) + 1;
+        System.out.println(geoffRandomAtk);
 
-        if (userCurrent.getSpeed() <= geoffCurrent.getSpeed()) {
-
+        if (userCurrent.getSpeed() >= geoffCurrent.getSpeed()) {
         }
 
         /*
