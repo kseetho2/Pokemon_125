@@ -58,7 +58,7 @@ public class Pokemon {
         defense = defenseInput;
         specialDefense = spDefenseInput;
         name = input;
-        if (input.equals("Voltorb")) {
+        if (input.equals("Voltorb")) { //each move is -1 in  terms of index in the array
             moveOneId = 435; //Discharge 435
             moveTwoId = 153; // Explosion 153
             moveThreeId = 205; // Roll-out 205
