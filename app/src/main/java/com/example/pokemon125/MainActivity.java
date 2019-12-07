@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
+                               //newIntent.putExtra("FLUFFY", 50);
                                startActivity(newIntent);
 
                                /*

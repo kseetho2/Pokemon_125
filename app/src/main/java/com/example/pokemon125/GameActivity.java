@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -65,76 +69,88 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView geoffSecondRow;
     private TextView playerFirstRow;
     private TextView playerSecondRow;
+    private static int firstOnCreate = 0;
+
+    private ViewFlipper viewFlipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
-        garchomp = new Pokemon("GARCHOMP", 420, 482, 361, 372, 317, 311);
-        greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
-        voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
-        riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
-        six = new Pokemon("POKEMON 6", 420, 229, 218, 207, 251, 229); // NEED TO EDIT
-        userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, six);
+        if (firstOnCreate == 0) {
+            firstOnCreate++;
+            eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
+            garchomp = new Pokemon("GARCHOMP", 420, 482, 361, 372, 317, 311);
+            greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
+            voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
+            riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
+            six = new Pokemon("POKEMON 6", 420, 229, 218, 207, 251, 229); // NEED TO EDIT
+            userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, six);
 
-        ekans = new Pokemon("MACHINE PROJECT 0", 274, 240, 205, 196, 227, 229);
-        porygon = new Pokemon("MACHINE PROJECT 1", 334, 240, 262, 295, 273, 196);
-        entei = new Pokemon("MACHINE PROJECT 2", 434, 361, 295, 306, 273, 328);
-        mrMime = new Pokemon("MACHINE PROJECT 3", 284, 207, 251, 328, 372, 306);
-        dialga = new Pokemon("MACHINE PROJECT 4", 404, 372, 372, 438, 328, 306);
-        mewTwo = new Pokemon("FINAL PROJECT", 416, 350, 306, 447, 306, 394);
+            ekans = new Pokemon("MACHINE PROJECT 0", 274, 240, 205, 196, 227, 229);
+            porygon = new Pokemon("MACHINE PROJECT 1", 334, 240, 262, 295, 273, 196);
+            entei = new Pokemon("MACHINE PROJECT 2", 434, 361, 295, 306, 273, 328);
+            mrMime = new Pokemon("MACHINE PROJECT 3", 284, 207, 251, 328, 372, 306);
+            dialga = new Pokemon("MACHINE PROJECT 4", 404, 372, 372, 438, 328, 306);
+            mewTwo = new Pokemon("FINAL PROJECT", 416, 350, 306, 447, 306, 394);
 
-        geoffLineup = Arrays.asList(ekans, porygon, entei, mrMime, dialga, mewTwo);
-        geoffPokeCount = 0;
-        geoffCurrent = geoffLineup.get(geoffPokeCount);
+            geoffLineup = Arrays.asList(ekans, porygon, entei, mrMime, dialga, mewTwo);
+            geoffPokeCount = 0;
+            geoffCurrent = geoffLineup.get(geoffPokeCount);
 
-        setContentView(R.layout.fight_screen);
-        move1 = findViewById(R.id.moveTL);
-        move2 = findViewById(R.id.moveTR);
-        move3 = findViewById(R.id.moveBL);
-        move4 = findViewById(R.id.moveBR);
-        geoffFirstRow = findViewById(R.id.geoffFirstRow);
-        geoffSecondRow = findViewById(R.id.geoffSecondRow);
-        playerFirstRow = findViewById(R.id.playerFirstRow);
-        playerSecondRow = findViewById(R.id.playerSecondRow);
+            setContentView(R.layout.fight_screen);
+            move1 = findViewById(R.id.moveTL);
+            move2 = findViewById(R.id.moveTR);
+            move3 = findViewById(R.id.moveBL);
+            move4 = findViewById(R.id.moveBR);
+            geoffFirstRow = findViewById(R.id.geoffFirstRow);
+            geoffSecondRow = findViewById(R.id.geoffSecondRow);
+            playerFirstRow = findViewById(R.id.playerFirstRow);
+            playerSecondRow = findViewById(R.id.playerSecondRow);
 
-        Intent intent = getIntent();
-        String currentSelection = intent.getStringExtra("selectedPokemon");
-        message = findViewById(R.id.messageBox);
-        message.setText("What will \n" + currentSelection + " do?");
+            Intent intent = getIntent();
+            String currentSelection = intent.getStringExtra("selectedPokemon");
+            message = findViewById(R.id.messageBox);
+            message.setText("What will \n" + currentSelection + " do?");
 
-        //where you would rename the moves:
-        move1.setText("50 dmg");
-        move2.setText("100 dmg");
-        move3.setText("150 dmg");
-        move4.setText("200 dmg");
-        fightOption = findViewById(R.id.fight);
-        cheatOption = findViewById(R.id.cheat);
-        switchPokemonOption = findViewById(R.id.switchP);
-        runOption = findViewById(R.id.run);
+            //where you would rename the moves:
+            move1.setText("50 dmg");
+            move2.setText("100 dmg");
+            move3.setText("150 dmg");
+            move4.setText("200 dmg");
+            fightOption = findViewById(R.id.fight);
+            cheatOption = findViewById(R.id.cheat);
+            switchPokemonOption = findViewById(R.id.switchP);
+            runOption = findViewById(R.id.run);
 
-        if (currentSelection.equals("FLUFFY")) {
-            userCurrent = eevee;
+            if (currentSelection.equals("FLUFFY")) {
+                userCurrent = eevee;
+            }
+            if (currentSelection.equals("GARCHOMP")) {
+                userCurrent = garchomp;
+            }
+            if (currentSelection.equals("NARUTO")) {
+                userCurrent = greninja;
+            }
+            if (currentSelection.equals("VOLTORB")) {
+                userCurrent = voltorb;
+            }
+            if (currentSelection.equals("RAMICU")) {
+                userCurrent = riolu;
+            }
+            if (currentSelection.equals("Pokemon 6")) { //TO BE DETERMINED
+                userCurrent = eevee;
+            }
+            setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+
+            playerOptions();
+        } else {
+            setContentView(R.layout.fight_screen);
+            setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+
+            playerOptions();
         }
-        if (currentSelection.equals("GARCHOMP")) {
-            userCurrent = garchomp;
-        }
-        if (currentSelection.equals("NARUTO")) {
-            userCurrent = greninja;
-        }
-        if (currentSelection.equals("VOLTORB")) {
-            userCurrent = voltorb;
-        }
-        if (currentSelection.equals("RAMICU")) {
-            userCurrent = riolu;
-        }
-        if (currentSelection.equals("Pokemon 6")) { //TO BE DETERMINED
-            userCurrent = eevee;
-        }
-        setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-        setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
-
-        playerOptions();
     }
 
     private void playerOptions() {
@@ -147,16 +163,41 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         runOption.setOnClickListener(this);
     }
 
+    public void igPokemonClicked(View v) {
+        RadioGroup radioGroup = findViewById(R.id.igUserPokemonList);
+        int radioId = radioGroup.getCheckedRadioButtonId();
+
+        RadioButton selectedPokemon = findViewById(radioId);
+        if (selectedPokemon.getText().equals("FLUFFY")) {
+            userCurrent = eevee;
+        } else if (selectedPokemon.getText().equals("GARCHOMP")) {
+            userCurrent = garchomp;
+        } else if (selectedPokemon.getText().equals("NARUTO")) {
+            userCurrent = greninja;
+        } else if (selectedPokemon.getText().equals("VOLTORB")) {
+            userCurrent = voltorb;
+        } else if (selectedPokemon.getText().equals("RAMICU")) {
+            userCurrent = riolu;
+        } else if (selectedPokemon.getText().equals("POKEMON 6")) {
+            userCurrent = six;
+        }
+
+        //if statement for if pokemon is fainted
+        Toast.makeText(this, "Selected Pokemon: " + selectedPokemon.getText(), Toast.LENGTH_SHORT).show();
+        //viewFlipper.showNext();
+    }
+
     @Override
     public void onClick(View v) {
         boolean wasMove = false;
-        final LinearLayout wholeScreen = findViewById(R.id.fight_Screen);
+        final LinearLayout wholeScreen = findViewById(R.id.fightScreen);
         switch (v.getId()) {
             case R.id.moveTL:
                 //Move 1 selected
                 userDamageName = "50 dmg";
                 userDamage = 50;
                 wasMove = true;
+                setContentView(R.layout.fight_screen);
                 break;
             case R.id.moveTR:
                 userDamageName = "100 dmg";
@@ -373,6 +414,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void updatePokemonSelection() {
         setContentView(R.layout.switch_pokemon);
+        RadioGroup pokeSelection = findViewById(R.id.userPokemonList);
+        pokeSelection.setVisibility(View.INVISIBLE);
+        RadioGroup newPokeSelection = findViewById(R.id.igUserPokemonList);
+        newPokeSelection.setVisibility(View.VISIBLE);
         TextView HP1 = findViewById(R.id.HP1);
         HP1.setText("HP: " + eevee.getCurrentHealth() + "/" + eevee.getTotalHealth());
         TextView HP2 = findViewById(R.id.HP2);
@@ -392,12 +437,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final int voltorbHP = voltorb.getCurrentHealth();
         final int rioluHP = riolu.getCurrentHealth();
         final int sixHP = six.getCurrentHealth(); //need to refactor for 6th pkmn
+        final Bundle save = new Bundle();
+        onSaveInstanceState(save);
         enterFightScene.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.fight_screen);
+                onRestoreInstanceState(save);
+                //onRestoreInstanceState(save);
                 setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
                 eevee.setCurrentHealth(eeveeHP);
+                onRestoreInstanceState(save);
                 garchomp.setCurrentHealth(garchompHP);
                 greninja.setCurrentHealth(greninjaHP);
                 voltorb.setCurrentHealth(voltorbHP);
@@ -407,6 +456,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 playerOptions();
             }
         });
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(eevee.getName(), eevee.getCurrentHealth());
+        //savedInstanceState.putInt(PLAYER_LEVEL, mCurrentLevel);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance
+        eevee.setCurrentHealth(savedInstanceState.getInt(eevee.getName()));
+        //mCurrentLevel = savedInstanceState.getInt(PLAYER_LEVEL);
     }
 
     private boolean checkFaint() {
