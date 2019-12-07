@@ -342,13 +342,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                                 });
                             } else {
                                 setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
-                                message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "! " + userCurrent.getName() + " has fainted! Choose your next staff member!");
-                                LinearLayout wholeScreen = findViewById(R.id.fightScreen);
+                                message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                                final LinearLayout wholeScreen = findViewById(R.id.fightScreen);
                                 wholeScreen.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        viewFlipper.showPrevious();
-                                        updatePokemonSelection();
+                                        message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
+                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                viewFlipper.showPrevious();
+                                                updatePokemonSelection();
+                                            }
+                                        });
+
                                     }
                                 });
                             }
