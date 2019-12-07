@@ -65,7 +65,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         move4 = findViewById(R.id.moveBR);
 
         //where you would rename the moves:
-        move1.setText("50 dmg");
+        //move1.setText("50 dmg");
         move2.setText("100 dmg");
         move3.setText("150 dmg");
         move4.setText("200 dmg");

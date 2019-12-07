@@ -10,6 +10,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLOutput;
 
 import me.sargunvohra.lib.pokekotlin.client.PokeApi;
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
@@ -55,15 +57,34 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton selectedPokemon;
     private PokeApi pokeAPI;
     private JSONObject object;
+    private JSONArray array;
+    private String move1;
+    private String data;
+    private boolean dataReceived = false;
     //private JSONObject data;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
-
+        String url = "https://pokeapi.co/api/v2/move?offset=0&limit=700";
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,new Response.Listener<JSONObject>() {
+            public void onResponse(JSONObject response) {
+                try {
+                    array = response.getJSONArray("results");
+                    move1 = response.toString();
+                } catch (Exception e) {
+                    Log.e("I wanna", "die");
+                }
+            }
+        }, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("That didn't work!");
+            }
+        });
+        queue.add(stringRequest);
         mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
             public void onClick(View v) {
                 setContentView(R.layout.exposition); //enter exposition
@@ -87,21 +108,42 @@ public class MainActivity extends AppCompatActivity {
                                //connect();
                                //move2.setText(pokeAPI.getMove(247).getName());
 
-                               String url = "https://pokeapi.co/api/v2/move/1";
-                               JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,  new Response.Listener<JSONObject>() {
-                                   public void onResponse(JSONObject response) {
-                                       object = response;
-                                   }
-                               }, new Response.ErrorListener() {
-                                   public void onErrorResponse(VolleyError error) {
-                                       System.out.println("That didn't work!");
-                                   }
-                               });
-                               queue.add(stringRequest);
+                               //String url = "https://pokeapi.co/api/v2/move?offset=0&limit=700";
 
+                               System.out.println(move1);
+                               System.out.println(dataReceived);
+                               setContentView(R.layout.fight_screen);
+                               Button moveTL = findViewById(R.id.moveTL);
+                               Button moveTR = findViewById(R.id.moveTR);
+                               Button moveBL = findViewById(R.id.moveBL);
+                               Button moveBR = findViewById(R.id.moveBR);
+                               moveTL.setVisibility(View.VISIBLE);
+                               moveTR.setVisibility(View.VISIBLE);
+                               moveBL.setVisibility(View.VISIBLE);
+                               moveBR.setVisibility(View.VISIBLE);
+                               Example test = new Example(array);
+                               moveTL.setText(test.findMove(246));
+                               moveTR.setText(test.findMove(129));
+                               moveBL.setText(test.findMove(43));
+                               moveBR.setText(test.findMove(62));
+
+                               //test.setMoveText(test.findMove(246), test.findMove(129), test.findMove(43), test.findMove(62));
+                               /*
+                               try {
+                                   array = object.getJSONArray("results");
+                                   move1 = array.getString(0);
+                               } catch (JSONException e) {
+                                   Log.e("MYApp", "didn't work", e);
+                               }
+                               TextView moveTL = findViewById(R.id.moveTL);
+                               moveTL.setText(move1);
+                                */
+                               /**
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
                                startActivity(newIntent);
+                                */
+
 
                                /*
                                try {

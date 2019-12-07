@@ -1,5 +1,6 @@
 package com.example.pokemon125;
 
+import android.os.AsyncTask;
 import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -88,7 +89,8 @@ public class Pokemon {
     public void Pokemon(int number, int move1, int move2, int move3, int move4) {
 
     }
-    public String getMove1() { return findMove(moveOneId); }
+    public String getMove1() {
+        return findMove(moveOneId); }
     public String getMove2() {
         return findMove(moveTwoId);
     }
