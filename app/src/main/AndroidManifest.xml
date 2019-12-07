@@ -28,6 +28,7 @@
             android:name=".GameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|keyboardHidden"
         ></activity>
     </application>
 

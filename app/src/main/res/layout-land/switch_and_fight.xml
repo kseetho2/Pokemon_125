@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/fightScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="600dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/geoffText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="50dp">
+
+                        <TextView
+                            android:id="@+id/geoffFirstRow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Machine Project 0 :L100"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/geoffSecondRow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HP: 420/420" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/geoffVisual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/geoffImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/image_test1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="700dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/playerVisual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/playerImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="gudeAvocado"
+                            app:srcCompat="@drawable/image_test2" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/playerText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/playerFirstRow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FLUFFY :L100"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/playerSecondRow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HP: 420/420" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/playerOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/messageBox"
+                    android:layout_width="483dp"
+                    android:layout_height="match_parent"
+                    android:text="What will \nFLUFFY do?"
+                    android:textAlignment="center"
+                    android:textSize="40sp"
+                    tools:layout_editor_absoluteY="18dp" />
+
+                <Button
+                    android:id="@+id/moveBR"
+                    android:layout_width="240dp"
+                    android:layout_height="78dp"
+                    android:text="@string/move_4"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/moveBL" />
+
+                <Button
+                    android:id="@+id/moveBL"
+                    android:layout_width="240dp"
+                    android:layout_height="77dp"
+                    android:text="@string/move_3"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/moveTL"
+                    android:layout_width="240dp"
+                    android:layout_height="77dp"
+                    android:text="@string/move_1"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/moveBL"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/moveTR"
+                    android:layout_width="240dp"
+                    android:layout_height="77dp"
+                    android:text="@string/move_2"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/moveBR"
+                    app:layout_constraintStart_toEndOf="@+id/moveTL" />
+
+                <Button
+                    android:id="@+id/fight"
+                    android:layout_width="100dp"
+                    android:layout_height="77dp"
+                    android:text="@string/fight"
+                    app:layout_constraintBottom_toTopOf="@+id/switchP"
+                    app:layout_constraintEnd_toStartOf="@+id/cheat"
+                    app:layout_constraintStart_toEndOf="@+id/moveTR" />
+
+                <Button
+                    android:id="@+id/switchP"
+                    android:layout_width="100dp"
+                    android:layout_height="77dp"
+                    android:text="@string/pokemon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/run"
+                    app:layout_constraintStart_toEndOf="@+id/moveBR" />
+
+                <Button
+                    android:id="@+id/cheat"
+                    android:layout_width="100dp"
+                    android:layout_height="77dp"
+                    android:text="@string/cheat"
+                    app:layout_constraintBottom_toTopOf="@+id/run"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/run"
+                    android:layout_width="100dp"
+                    android:layout_height="77dp"
+                    android:text="@string/run"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/switchScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            tools:ignore="MissingDefaultResource">
+
+            <Space
+                android:id="@+id/emptySpace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_toRightOf="@+id/userPokemonList"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staffName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="DANIEL"
+                        android:textColor="#708090" />
+
+                    <TextView
+                        android:id="@+id/L1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text=":L100" />
+
+                    <TextView
+                        android:id="@+id/HP1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="HP:  314/314" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staffName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="AJAY"
+                        android:textColor="#708090" />
+
+                    <TextView
+                        android:id="@+id/L2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text=":L100" />
+
+                    <TextView
+                        android:id="@+id/HP2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="HP: 420/420" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staffName3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="NIKHIL"
+                        android:textColor="#708090" />
+
+                    <TextView
+                        android:id="@+id/L3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text=":L100" />
+
+                    <TextView
+                        android:id="@+id/HP3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="HP: 348/348" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staffName4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="BEN"
+                        android:textColor="#708090" />
+
+                    <TextView
+                        android:id="@+id/L4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text=":L100" />
+
+                    <TextView
+                        android:id="@+id/HP4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="HP: 284/284" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staffName5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="RIMA"
+                        android:textColor="#708090" />
+
+                    <TextView
+                        android:id="@+id/L5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text=":L100" />
+
+                    <TextView
+                        android:id="@+id/HP5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="HP: 284/284" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/staffName6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="STAFF 6"
+                        android:textColor="#708090" />
+
+                    <TextView
+                        android:id="@+id/L6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text=":L100" />
+
+                    <TextView
+                        android:id="@+id/HP6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="HP: 100/100" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/enterFightScreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="210dp"
+                    android:layout_weight="1"
+                    android:text="I CHOOSE YOU!" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:layout_centerHorizontal="true"
+                android:text="YOUR POKEMON"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/userPokemonList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="25dp">
+
+                <RadioButton
+                    android:id="@+id/pokemon1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="pokemonClicked"
+                    android:padding="5dp"
+                    android:text="FLUFFY" />
+
+                <RadioButton
+                    android:id="@+id/pokemon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="pokemonClicked"
+                    android:padding="5dp"
+                    android:text="GARCHOMP" />
+
+                <RadioButton
+                    android:id="@+id/pokemon3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="pokemonClicked"
+                    android:padding="5dp"
+                    android:text="NARUTO" />
+
+                <RadioButton
+                    android:id="@+id/pokemon4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="pokemonClicked"
+                    android:padding="5dp"
+                    android:text="VOLTORB" />
+
+                <RadioButton
+                    android:id="@+id/pokemon5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="pokemonClicked"
+                    android:padding="5dp"
+                    android:text="RAMICU" />
+
+                <RadioButton
+                    android:id="@+id/pokemon6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="pokemonClicked"
+                    android:padding="5dp"
+                    android:text="POKEMON 6" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/igUserPokemonList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="25dp"
+                android:visibility="invisible">
+
+                <RadioButton
+                    android:id="@+id/igPokemon1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="igPokemonClicked"
+                    android:padding="5dp"
+                    android:text="FLUFFY" />
+
+                <RadioButton
+                    android:id="@+id/igPokemon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="igPokemonClicked"
+                    android:padding="5dp"
+                    android:text="GARCHOMP" />
+
+                <RadioButton
+                    android:id="@+id/igPokemon3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="igPokemonClicked"
+                    android:padding="5dp"
+                    android:text="NARUTO" />
+
+                <RadioButton
+                    android:id="@+id/igPokemon4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="igPokemonClicked"
+                    android:padding="5dp"
+                    android:text="VOLTORB" />
+
+                <RadioButton
+                    android:id="@+id/igPokemon5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="igPokemonClicked"
+                    android:padding="5dp"
+                    android:text="RAMICU" />
+
+                <RadioButton
+                    android:id="@+id/igPokemon6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="igPokemonClicked"
+                    android:padding="5dp"
+                    android:text="POKEMON 6" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="154dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@android:dimen/thumbnail_width"
+                    android:text="\nTHE 'CHALLEN'GER WILL BE USING _______. \n\nWHICH POKEMON WILL YOU CHOOSE?"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ViewFlipper>
+
+</RelativeLayout>
