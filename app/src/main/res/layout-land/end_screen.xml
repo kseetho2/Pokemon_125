@@ -7,7 +7,7 @@
     tools:ignore="MissingDefaultResource">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/endScreenText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Congratulations! You beat the 'CHALLEN'GER!"

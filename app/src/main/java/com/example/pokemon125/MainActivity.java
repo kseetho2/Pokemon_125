@@ -80,13 +80,6 @@ public class MainActivity extends AppCompatActivity {
                                int radioId = radioGroup.getCheckedRadioButtonId();
                                selectedPokemon = findViewById(radioId);
 
-                               //GameActivity gameLogic = new GameActivity();
-
-                               //PokeApi pokeApi = new PokeApiClient();
-                               Pokemon eevee = new Pokemon("Fluffy", 314, 229, 218, 207, 251, 229);
-                               //connect();
-                               //move2.setText(pokeAPI.getMove(247).getName());
-
                                String url = "https://pokeapi.co/api/v2/move/1";
                                JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,  new Response.Listener<JSONObject>() {
                                    public void onResponse(JSONObject response) {
