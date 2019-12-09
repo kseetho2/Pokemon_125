@@ -254,7 +254,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text=":L100" />
+                        android:text=":Lv100" />
 
                     <TextView
                         android:id="@+id/HP1"
@@ -291,7 +291,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text=":L100" />
+                        android:text=":Lv100" />
 
                     <TextView
                         android:id="@+id/HP2"
@@ -319,7 +319,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text=":L100" />
+                        android:text=":Lv100" />
 
                     <TextView
                         android:id="@+id/HP3"
@@ -375,7 +375,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text=":L100" />
+                        android:text=":Lv100" />
 
                     <TextView
                         android:id="@+id/HP5"
@@ -403,14 +403,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text=":L100" />
+                        android:text=":Lv100" />
 
                     <TextView
                         android:id="@+id/HP6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="HP: 100/100" />
+                        android:text="HP: 394/394" />
 
                 </LinearLayout>
 
@@ -493,7 +493,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="pokemonClicked"
                     android:padding="5dp"
-                    android:text="POKEMON 6" />
+                    android:text="TORTERRA" />
 
             </RadioGroup>
 
@@ -552,7 +552,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="igPokemonClicked"
                     android:padding="5dp"
-                    android:text="POKEMON 6" />
+                    android:text="TORTERRA" />
 
             </RadioGroup>
 
