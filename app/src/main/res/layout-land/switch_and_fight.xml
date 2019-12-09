@@ -42,7 +42,7 @@
                             android:id="@+id/geoffFirstRow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Machine Project 0 :L100"
+                            android:text="MACHINE PROJECT 0 :L100"
                             android:textSize="18sp" />
 
                         <TextView
@@ -57,13 +57,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
 
-                        <ImageView
-                            android:id="@+id/geoffImage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/image_test1" />
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/geoffSprite"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/rayquaza"
+                            android:scaleType="centerInside"
+                            android:adjustViewBounds="true"
+                            />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -84,23 +89,25 @@
 
                     <LinearLayout
                         android:id="@+id/playerVisual"
-                        android:layout_width="wrap_content"
+                        android:layout_width="500dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
 
-                        <ImageView
-                            android:id="@+id/playerImage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="gudeAvocado"
-                            app:srcCompat="@drawable/image_test2" />
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/userSprite"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/eevee_back"
+                            android:scaleType="centerInside"
+                            android:adjustViewBounds="true"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/playerText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
+                        android:layout_gravity="center|end"
                         android:orientation="vertical">
 
                         <TextView

@@ -109,6 +109,7 @@ public class Pokemon {
     public int getSpeed() { return speed; }
     public String getName() { return name; }
 
+
     public String findMove(int input) {
         JSONArray array;
         try {

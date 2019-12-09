@@ -20,6 +20,7 @@ import java.util.List;
 
 import me.sargunvohra.lib.pokekotlin.client.PokeApi;
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
+import pl.droidsonroids.gif.GifImageView;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private Pokemon eevee;
@@ -72,7 +73,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView geoffSecondRow;
     private TextView playerFirstRow;
     private TextView playerSecondRow;
-    private static int firstOnCreate = 0;
+    private GifImageView geoffSprite; //7up
+    private GifImageView userSprite; //7up
 
     private ViewFlipper viewFlipper;
 
@@ -109,6 +111,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         geoffSecondRow = findViewById(R.id.geoffSecondRow);
         playerFirstRow = findViewById(R.id.playerFirstRow);
         playerSecondRow = findViewById(R.id.playerSecondRow);
+        geoffSprite = findViewById(R.id.geoffSprite); //7up
+        userSprite = findViewById(R.id.userSprite); //7up
 
         Intent intent = getIntent();
         String currentSelection = intent.getStringExtra("selectedPokemon");
@@ -127,21 +131,27 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (currentSelection.equals("FLUFFY")) {
             userCurrent = eevee;
+            userSprite.setImageResource(R.drawable.eevee_back); //7up
         }
         if (currentSelection.equals("GARCHOMP")) {
             userCurrent = garchomp;
+            userSprite.setImageResource(R.drawable.garchomp_back); //7up
         }
         if (currentSelection.equals("NARUTO")) {
             userCurrent = greninja;
+            userSprite.setImageResource(R.drawable.greninja_back); //7up
         }
         if (currentSelection.equals("VOLTORB")) {
             userCurrent = voltorb;
+            userSprite.setImageResource(R.drawable.voltorb_back); //7up
         }
         if (currentSelection.equals("RAMICU")) {
             userCurrent = riolu;
+            userSprite.setImageResource(R.drawable.riolu_back); //7up
         }
-        if (currentSelection.equals("Pokemon 6")) { //TO BE DETERMINED
-            userCurrent = eevee;
+        if (currentSelection.equals("POKEMON 6")) { //TO BE DETERMINED
+            userCurrent = six; //7up but not really
+            userSprite.setImageResource(R.drawable.torterra_back); //7up
         }
         setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
         setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
@@ -172,36 +182,42 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if (eevee.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
+                userSprite.setImageResource(R.drawable.eevee_back); //7up
             }
         } else if (selectedPokemon.getText().equals("GARCHOMP")) {
             tempCheck = garchomp;
             if (garchomp.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
+                userSprite.setImageResource(R.drawable.garchomp_back); //7up
             }
         } else if (selectedPokemon.getText().equals("NARUTO")) {
             tempCheck = greninja;
             if (greninja.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
+                userSprite.setImageResource(R.drawable.greninja_back); //7up
             }
         } else if (selectedPokemon.getText().equals("VOLTORB")) {
             tempCheck = voltorb;
             if (voltorb.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
+                userSprite.setImageResource(R.drawable.voltorb_back); //7up
             }
         } else if (selectedPokemon.getText().equals("RAMICU")) {
             tempCheck = riolu;
             if (riolu.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
+                userSprite.setImageResource(R.drawable.riolu_back); //7up
             }
         } else if (selectedPokemon.getText().equals("POKEMON 6")) {
             tempCheck = six;
             if (six.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
+                userSprite.setImageResource(R.drawable.torterra_back); //7up
             }
         }
         if (available) {
@@ -213,7 +229,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Toast.makeText(this, "That staff member has fainted!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -284,6 +299,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onClick(View view) {
                             message.setText("The 'CHALLEN'GER will now use " + geoffCurrent.getName());
+                            //7up
+                            if (geoffPokeCount == 0) {
+                                geoffSprite.setImageResource(R.drawable.rayquaza);
+                            } else if (geoffPokeCount == 1) {
+                                geoffSprite.setImageResource(R.drawable.porygon);
+                            } else if (geoffPokeCount == 2) {
+                                geoffSprite.setImageResource(R.drawable.entei);
+                            } else if (geoffPokeCount == 3) {
+                                geoffSprite.setImageResource(R.drawable.mr_mime);
+                            } else if (geoffPokeCount == 4) {
+                                geoffSprite.setImageResource(R.drawable.dialga);
+                            } else if (geoffPokeCount == 1) {
+                                geoffSprite.setImageResource(R.drawable.mewtwo);
+                            }
                             setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
                             wholeScreen.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -401,25 +430,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
-    /*
-    if (userCurrent.getSpeed() >= geoffCurrent.getSpeed()) {
-                    message.setText(userCurrent.getName() + " used " + userDamageName + "!");
-                    geoffCurrent.setCurrentHealth(geoffCurrent.getCurrentHealth() - userDamage);
-                    setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-                    LinearLayout wholeScreen = findViewById(R.id.fight_Screen);
-                    wholeScreen.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            message.setText("What will \n" + userCurrent.getName() + " do?");
-                            return;
-                        }
-                    });
-                } else {
-                    userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
-                    setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
-                }
-     */
-
     private void fightAction() {
         showMoves();
         move1.setOnClickListener(this);
@@ -505,41 +515,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         geoffMove3Dmg = 150;
         geoffMove4Dmg = 200;
     }
-
-    /*
-        user chooses move
-        if user is first based on speed:
-            user attacks
-            geoff takes dmg
-            >check for geoff faint
-                if yes, check if all pokemon are fainted
-                    if yes, game over
-                else switch to next pokemon
-
-            geoff attacks
-            user takes dmg
-            >check for user faint
-                if yes, check if all pokemon are fainted
-                    if yes, game over
-                else switch to pokemon selection menu
-
-        if geoff is first based on speed:
-            geoff attacks
-            user takes dmg (^^)
-            user attacks
-            geoff takes dmg (^^)
-
-        message board back up, repeat
-
-        pokemon selection menu method:
-        update hp of pokemon with current hp
-        upon selection, check hp:
-            if 0:
-                toast message
-            else:
-                set current pokemon to selected pokemon, copy from onCreate
-         */
-
 
     /**
      * Set the name of the moves based on the current Pokemon selected. Not actually used yet LOL
