@@ -20,6 +20,7 @@ import java.util.List;
 
 import me.sargunvohra.lib.pokekotlin.client.PokeApi;
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
+import pl.droidsonroids.gif.GifDrawable;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private Pokemon eevee;
@@ -27,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Pokemon greninja;
     private Pokemon voltorb;
     private Pokemon riolu;
-    private Pokemon torterra; //TO BE DETERMINED
+    private Pokemon torterra;
     private List<Pokemon> userLineup;
     private Pokemon userCurrent;
 
@@ -82,11 +83,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
+        //eevee.getMoveData();
         garchomp = new Pokemon("GARCHOMP", 420, 482, 361, 372, 317, 311);
+        //garchomp.getMoveData();
         greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
+        //greninja.getMoveData();
         voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
+        //voltorb.getMoveData();
         riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
+        //riolu.getMoveData();
         torterra = new Pokemon("TORTERRA", 394, 348, 273, 339, 295, 232);
+        //torterra.getMoveData();
         userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, torterra);
         userFaintCount = 0;
 
@@ -256,26 +263,26 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.moveTL:
                 //Move 1 selected
-                userDamageName = "50 dmg";
-                userDamage = 50;
+                userDamage = userCurrent.getMoveOnePower();
+                userDamageName = userDamage + " dmg";
                 wasMove = true;
                 break;
             case R.id.moveTR:
                 //Move 2 selected
-                userDamageName = "100 dmg";
-                userDamage = 100;
+                userDamage = userCurrent.getMoveTwoPower();
+                userDamageName = userDamage + " dmg";
                 wasMove = true;
                 break;
             case R.id.moveBL:
                 //Move 3 selected
-                userDamageName = "150 dmg";
-                userDamage = 150;
+                userDamage = userCurrent.getMoveThreePower();
+                userDamageName = userDamage + " dmg";
                 wasMove = true;
                 break;
             case R.id.moveBR:
                 //Move 4 selected
-                userDamageName = "200 dmg";
-                userDamage = 200;
+                userDamage = userCurrent.getMoveFourPower();
+                userDamageName = userDamage + " dmg";
                 wasMove = true;
                 break;
             case R.id.fight:

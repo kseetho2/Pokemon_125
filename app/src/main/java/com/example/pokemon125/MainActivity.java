@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         RequestQueue queue = Volley.newRequestQueue(this);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
+        //
         String url = "https://pokeapi.co/api/v2/move?offset=0&limit=700";
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,new Response.Listener<JSONObject>() {
             public void onResponse(JSONObject response) {
@@ -66,6 +67,45 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("That didn't work!");
             }
         });
+        //
+        Pokemon eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
+        Pokemon garchomp = new Pokemon("GARCHOMP", 420, 482, 361, 372, 317, 311);
+        Pokemon greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
+        Pokemon voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
+        Pokemon riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
+        Pokemon torterra = new Pokemon("TORTERRA", 394, 348, 273, 339, 295, 232);
+        //
+        queue.add(eevee.getMoveData1());
+        queue.add(eevee.getMoveData2());
+        queue.add(eevee.getMoveData3());
+        queue.add(eevee.getMoveData4());
+        //
+
+        queue.add(garchomp.getMoveData1());
+        queue.add(garchomp.getMoveData2());
+        queue.add(garchomp.getMoveData3());
+        queue.add(garchomp.getMoveData4());
+        //
+        queue.add(greninja.getMoveData1());
+        queue.add(greninja.getMoveData2());
+        queue.add(greninja.getMoveData3());
+        queue.add(greninja.getMoveData4());
+        //
+        queue.add(voltorb.getMoveData1());
+        queue.add(voltorb.getMoveData2());
+        queue.add(voltorb.getMoveData3());
+        queue.add(voltorb.getMoveData4());
+        //
+        queue.add(riolu.getMoveData1());
+        queue.add(riolu.getMoveData2());
+        queue.add(riolu.getMoveData3());
+        queue.add(riolu.getMoveData4());
+        //
+        queue.add(torterra.getMoveData1());
+        queue.add(torterra.getMoveData2());
+        queue.add(torterra.getMoveData3());
+        queue.add(torterra.getMoveData4());
+        //
         queue.add(stringRequest);
         mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
             public void onClick(View v) {
@@ -83,14 +123,8 @@ public class MainActivity extends AppCompatActivity {
                                int radioId = radioGroup.getCheckedRadioButtonId();
                                selectedPokemon = findViewById(radioId);
                                String test = selectedPokemon.getText().toString();
-                               //GameActivity gameLogic = new GameActivity();
 
-                               //PokeApi pokeApi = new PokeApiClient();
-                               Pokemon eevee = new Pokemon("Fluffy", 314, 229, 218, 207, 251, 229);
-                               //connect();
-                               //move2.setText(pokeAPI.getMove(247).getName());
 
-                               //String url = "https://pokeapi.co/api/v2/move?offset=0&limit=700";
 
 
                                setContentView(R.layout.fight_screen);
@@ -114,17 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                //moveBL.setText(test.findMove(43));
                                //moveBR.setText(test.findMove(62));
 
-                               //test.setMoveText(test.findMove(246), test.findMove(129), test.findMove(43), test.findMove(62));
-                               /*
-                               try {
-                                   array = object.getJSONArray("results");
-                                   move1 = array.getString(0);
-                               } catch (JSONException e) {
-                                   Log.e("MYApp", "didn't work", e);
-                               }
-                               TextView moveTL = findViewById(R.id.moveTL);
-                               moveTL.setText(move1);
-                                */
+
 
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
@@ -132,46 +156,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                               /*
-                               try {
-                                   int acc = (int) object.get("accuracy");
-                                   System.out.println(acc);
 
-                               } catch (JSONException e) {
-                                   //some exception handler code.
-                                   System.out.println("it didn't work :(");
-                               }
-                                */
-
-                               //gameLogic.initialSetup();
-
-
-                               /*
-                               connect();
-                               try {
-                                   String url = data.get("pound").toString();
-                               } catch (JSONException e) {
-                                   Toast.makeText(getApplicationContext(), "Oh no!", Toast.LENGTH_LONG).show();
-                               }
-                               move2.setText(gameLogic.getMoveName(10));
-
-                                */
                            }
                         });
                     }
                 });
             }
         });
-        /*
-        setSupportActionBar(toolbar);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-         */
+
     }
 
     public void pokemonClicked(View v) {
@@ -197,11 +189,12 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //noinspection SimplifiableIfStatemen
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }
