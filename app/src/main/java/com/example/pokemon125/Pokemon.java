@@ -1,29 +1,33 @@
 package com.example.pokemon125;
 
-import android.os.AsyncTask;
+
 import android.util.Log;
+
+import androidx.annotation.MainThread;
+
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.android.volley.toolbox.Volley;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import me.sargunvohra.lib.pokekotlin.client.PokeApi;
-import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
-import me.sargunvohra.lib.pokekotlin.model.PokemonMove;
+
 
 
 /**
  * this class will be used to set up the pokemon that we will premake based on responses from the TA/CA's
  * if we don't have enough we will come up with our own.
  */
-public class Pokemon {
+public class Pokemon extends MainActivity{
     private int id;
+    //Pokemon Related Variables
+    private String name;
     private int speed;
     private int totalHealth;
     private int currentHealth;
@@ -31,13 +35,34 @@ public class Pokemon {
     private int specialAttack;
     private int defense;
     private int specialDefense;
+    //Pokemon Move Related Variables
     private int moveOneId;
+    private int moveOnePower;
+    private int moveOneAcc;
+    private int moveOnePP;
+
+
     private int moveTwoId;
+    private int moveTwoPower;
+    private int moveTwoAcc;
+    private int moveTwoPP;
+
     private int moveThreeId;
+    private int moveThreePower;
+    private int moveThreeAcc;
+    private int moveThreePP;
+
     private int moveFourId;
-    private Pokemon one; //what's one?
-    private JSONObject data;
-    private String name;
+    private int moveFourPower;
+    private int moveFourAcc;
+    private int moveFourPP;
+
+    private JSONObject move1Object;
+    private JSONObject move2Object;
+    private JSONObject move3Object;
+    private JSONObject move4Object;
+    private JSONObject dataFromVollyRq;
+
 
     /**
      * Constructor for the Pokemon.
@@ -60,30 +85,35 @@ public class Pokemon {
         specialDefense = spDefenseInput;
         name = input;
         if (input.equals("Voltorb")) {
-            moveOneId = 435; //Discharge 435
-            moveTwoId = 153; // Explosion 153
-            moveThreeId = 205; // Roll-out 205
-            moveFourId = 129; // Swift 129
+            moveOneId = 434; //Discharge 435
+            moveTwoId = 152; // Explosion 153
+            moveThreeId = 204; // Roll-out 205
+            moveFourId = 128; // Swift 129
         } else if (input.equals("Garchomp")) {
-            moveOneId = 407; //Dragon-Rush 407
-            moveTwoId = 242; //Crunch 242
-            moveThreeId = 126; //Fire Blast 126
-            moveFourId = 434; //Draco-Meteor 434
+            moveOneId = 406; //Dragon-Rush 407
+            moveTwoId = 241; //Crunch 242
+            moveThreeId = 125; //Fire Blast 126
+            moveFourId = 433; //Draco-Meteor 434
         } else if (input.equals("Fluffy")) { // Eevee
-            moveOneId = 247; //Shadow-Ball 247
-            moveTwoId = 130; //Skull-Bash 130
-            moveThreeId = 44; //Bite 44
-            moveFourId = 63; //Hyper-Beam 63
+            moveOneId = 246; //Shadow-Ball 247
+            moveTwoId = 129; //Skull-Bash 130
+            moveThreeId = 43; //Bite 44
+            moveFourId = 62; //Hyper-Beam 63
         } else if (input.equals("Naruto")) { //Greninja
-            moveOneId = 416; //Giga-Impact 416
-            moveTwoId = 56; //Hydro-Pump 56
-            moveThreeId = 400; //Night-Slash 400
-            moveFourId = 58; //Ice-Beam 58
+            moveOneId = 415; //Giga-Impact 416
+            moveTwoId = 55; //Hydro-Pump 56
+            moveThreeId = 399; //Night-Slash 400
+            moveFourId = 57; //Ice-Beam 58
         } else if (input.equals("Rimacu")) { //Riolu
-            moveOneId = 398; //Poison-Jab 398
-            moveTwoId = 157; //Rock-Slide 157
-            moveThreeId = 411; //Focus-Blast 411
-            moveFourId = 89; //Earthquake 89
+            moveOneId = 397; //Poison-Jab 398
+            moveTwoId = 156; //Rock-Slide 157
+            moveThreeId = 410; //Focus-Blast 411
+            moveFourId = 88; //Earthquake 89
+        } else if (input.equals("Torterra")) {
+            moveOneId = 275; // Superpower 276
+            moveTwoId = 33; //Body-slam 34
+            moveThreeId = 337; // Frenzy plant 338
+            moveFourId = 441; // Iron head 442
         }
     }
     public void Pokemon(int number, int move1, int move2, int move3, int move4) {
@@ -104,7 +134,7 @@ public class Pokemon {
     public void setCurrentHealth(int input) { currentHealth = input; }
     public int getCurrentHealth() { return currentHealth; }
     public int getTotalHealth() { return totalHealth; }
-    public int getAttack() { return attack; };
+    public int getAttack() { return attack; }
     public int getSpecialAttack() { return specialAttack; }
     public int getDefense() { return defense; }
     public int getSpecialDefense() { return specialDefense; }
@@ -114,7 +144,7 @@ public class Pokemon {
     public String findMove(int input) {
         JSONArray array;
         try {
-            array = data.getJSONArray("results");
+            array = dataFromVollyRq.getJSONArray("results");
             for (int i = 0; i < array.length(); i++) {
                 if (i == input) {
                     JSONArray x = array.getJSONArray(input);
@@ -127,23 +157,97 @@ public class Pokemon {
         }
         return "Move";
     }
-    public void getData() {
-        String url = "https://pokeapi.co/api/v2/move";
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+    public void getMoveData() {
+        final String move1URL = "https://pokeapi.co/api/v2/move" + moveOneId;
+        final String move2URL = "https://pokeapi.co/api/v2/move" + moveTwoId;
+        String move3URL = "https://pokeapi.co/api/v2/move" + moveThreeId;
+        String move4URL = "https://pokeapi.co/api/v2/move" + moveFourId;
+        JsonObjectRequest movedata1 = new JsonObjectRequest
+                (Request.Method.GET, move1URL, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        data = response;
+                        try {
+                            moveOnePower = response.getInt("power");
+                            moveOneAcc = response.getInt("accuracy");
+                            moveOnePP = response.getInt("pp");
+                        } catch (Exception e) {
+                            Log.e("Poke 125", "move 1 data request failed");
+                        }
+
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        System.out.println("NO Wifi or Did not finish in Time");
 
                     }
                 });
+        JsonObjectRequest movedata2 = new JsonObjectRequest
+                (Request.Method.GET, move2URL, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                         try {
+                             moveTwoPower = response.getInt("power");
+                             moveTwoAcc = response.getInt("accuracy");
+                             moveTwoPP = response.getInt("pp");
+                         } catch (Exception e) {
+                             Log.e("Poke 125", "move 2 data request failed");
+                         }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("NO Wifi or Did not finish in Time");
+
+                    }
+                });
+        JsonObjectRequest movedata3 = new JsonObjectRequest
+                (Request.Method.GET, move3URL, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            moveThreePower = response.getInt("power");
+                            moveThreeAcc = response.getInt("accuracy");
+                            moveThreePP = response.getInt("pp");
+                        } catch (Exception e) {
+                            Log.e("Poke 125", "move 3 data request failed");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("NO Wifi or Did not finish in Time");
+
+                    }
+                });
+        JsonObjectRequest movedata4 = new JsonObjectRequest
+                (Request.Method.GET, move4URL, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            moveFourPower = response.getInt("power");
+                            moveFourAcc = response.getInt("accuracy");
+                            moveFourPP = response.getInt("pp");
+                        } catch (Exception e) {
+                            Log.e("Poke 125", "move 4 data request failed");
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("NO Wifi or Did not finish in Time");
+
+                    }
+                });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(movedata1);
+        queue.add(movedata2);
+        queue.add(movedata3);
+        queue.add(movedata4);
     }
 }

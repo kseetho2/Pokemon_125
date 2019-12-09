@@ -13,7 +13,7 @@ import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Pokemon greninja;
     private Pokemon voltorb;
     private Pokemon riolu;
-    private Pokemon six; //TO BE DETERMINED
+    private Pokemon torterra; //TO BE DETERMINED
     private List<Pokemon> userLineup;
     private Pokemon userCurrent;
 
@@ -49,6 +49,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button move2;
     private Button move3;
     private Button move4;
+    private int[] movelist;
+    Example data = new Example();
     private Button fightOption;
     private Button cheatOption;
     private Button switchPokemonOption;
@@ -84,8 +86,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
         voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
         riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
-        six = new Pokemon("POKEMON 6", 420, 229, 218, 207, 251, 229); // NEED TO EDIT
-        userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, six);
+        torterra = new Pokemon("TORTERRA", 394, 348, 273, 339, 295, 232);
+        userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, torterra);
         userFaintCount = 0;
 
         ekans = new Pokemon("MACHINE PROJECT 0", 274, 240, 205, 196, 227, 229);
@@ -115,34 +117,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         message = findViewById(R.id.messageBox);
         message.setText("What will \n" + currentSelection + " do?");
 
-        //where you would rename the moves:
-        //move1.setText("50 dmg");
-        move2.setText("100 dmg");
-        move3.setText("150 dmg");
-        move4.setText("200 dmg");
+
+
         fightOption = findViewById(R.id.fight);
         cheatOption = findViewById(R.id.cheat);
         switchPokemonOption = findViewById(R.id.switchP);
         runOption = findViewById(R.id.run);
 
-        if (currentSelection.equals("FLUFFY")) {
-            userCurrent = eevee;
-        }
-        if (currentSelection.equals("GARCHOMP")) {
-            userCurrent = garchomp;
-        }
-        if (currentSelection.equals("NARUTO")) {
-            userCurrent = greninja;
-        }
-        if (currentSelection.equals("VOLTORB")) {
-            userCurrent = voltorb;
-        }
-        if (currentSelection.equals("RAMICU")) {
-            userCurrent = riolu;
-        }
-        if (currentSelection.equals("Pokemon 6")) { //TO BE DETERMINED
-            userCurrent = eevee;
-        }
+        setText(currentSelection);
         setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
         setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
 
@@ -197,15 +179,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 available = true;
                 userCurrent = tempCheck;
             }
-        } else if (selectedPokemon.getText().equals("POKEMON 6")) {
-            tempCheck = six;
-            if (six.getCurrentHealth() > 0) {
+        } else if (selectedPokemon.getText().equals("TORTERRA")) {
+            tempCheck = torterra;
+            if (torterra.getCurrentHealth() > 0) {
                 available = true;
                 userCurrent = tempCheck;
             }
         }
         if (available) {
             Toast.makeText(this, "Selected Pokemon: " + selectedPokemon.getText(), Toast.LENGTH_SHORT).show();
+            setText(selectedPokemon.getText().toString());
             viewFlipper.showNext();
             setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
             setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
@@ -215,7 +198,57 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+    public void setText(String pokemonName) {
 
+        if (pokemonName.equals("FLUFFY")) {
+            userCurrent = eevee;
+            movelist = data.moveList("FLUFFY");
+            move1.setText(data.findMove(movelist[0]));
+            move2.setText(data.findMove(movelist[1]));
+            move3.setText(data.findMove(movelist[2]));
+            move4.setText(data.findMove(movelist[3]));
+        }
+        if (pokemonName.equals("GARCHOMP")) {
+            userCurrent = garchomp;
+            movelist = data.moveList("GARCHOMP");
+            move1.setText(data.findMove(movelist[0]));
+            move2.setText(data.findMove(movelist[1]));
+            move3.setText(data.findMove(movelist[2]));
+            move4.setText(data.findMove(movelist[3]));
+        }
+        if (pokemonName.equals("NARUTO")) {
+            userCurrent = greninja;
+            movelist = data.moveList("NARUTO");
+            move1.setText(data.findMove(movelist[0]));
+            move2.setText(data.findMove(movelist[1]));
+            move3.setText(data.findMove(movelist[2]));
+            move4.setText(data.findMove(movelist[3]));
+        }
+        if (pokemonName.equals("VOLTORB")) {
+            userCurrent = voltorb;
+            movelist = data.moveList("VOLTORB");
+            move1.setText(data.findMove(movelist[0]));
+            move2.setText(data.findMove(movelist[1]));
+            move3.setText(data.findMove(movelist[2]));
+            move4.setText(data.findMove(movelist[3]));
+        }
+        if (pokemonName.equals("RAMICU")) {
+            userCurrent = riolu;
+            movelist = data.moveList("RAMICU");
+            move1.setText(data.findMove(movelist[0]));
+            move2.setText(data.findMove(movelist[1]));
+            move3.setText(data.findMove(movelist[2]));
+            move4.setText(data.findMove(movelist[3]));
+        }
+        if (pokemonName.equals("TORTERRA")) {
+            userCurrent = eevee;
+            movelist = data.moveList("TORTERRA");
+            move1.setText(data.findMove(movelist[0]));
+            move2.setText(data.findMove(movelist[1]));
+            move3.setText(data.findMove(movelist[2]));
+            move4.setText(data.findMove(movelist[3]));
+        }
+    }
     @Override
     public void onClick(View v) {
         boolean wasMove = false;
@@ -228,16 +261,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 wasMove = true;
                 break;
             case R.id.moveTR:
+                //Move 2 selected
                 userDamageName = "100 dmg";
                 userDamage = 100;
                 wasMove = true;
                 break;
             case R.id.moveBL:
+                //Move 3 selected
                 userDamageName = "150 dmg";
                 userDamage = 150;
                 wasMove = true;
                 break;
             case R.id.moveBR:
+                //Move 4 selected
                 userDamageName = "200 dmg";
                 userDamage = 200;
                 wasMove = true;
@@ -488,7 +524,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         TextView HP5 = findViewById(R.id.HP5);
         HP5.setText("HP: " + riolu.getCurrentHealth() + "/" + riolu.getTotalHealth());
         TextView HP6 = findViewById(R.id.HP6);
-        HP6.setText("HP: " + six.getCurrentHealth() + "/" + six.getTotalHealth());
+        HP6.setText("HP: " + torterra.getCurrentHealth() + "/" + torterra.getTotalHealth());
     }
 
     /**

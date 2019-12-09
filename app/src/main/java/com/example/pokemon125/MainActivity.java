@@ -1,8 +1,7 @@
 package com.example.pokemon125;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -12,17 +11,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.JsonObject;
+
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 
 import android.util.Log;
-import android.view.FrameMetrics;
+
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,26 +25,16 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.SQLOutput;
+
 
 import me.sargunvohra.lib.pokekotlin.client.PokeApi;
-import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
-import me.sargunvohra.lib.pokekotlin.model.Move;
-import me.sargunvohra.lib.pokekotlin.model.PokeathlonStat;
-import me.sargunvohra.lib.pokekotlin.model.PokemonMove;
-import me.sargunvohra.lib.pokekotlin.model.PokemonSpecies;
-
-import static com.android.volley.Request.Method.GET;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,10 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private PokeApi pokeAPI;
     private JSONObject object;
     private JSONArray array;
-    private String move1;
-    private String data;
     private boolean dataReceived = false;
-    //private JSONObject data;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -74,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     array = response.getJSONArray("results");
-                    move1 = response.toString();
                 } catch (Exception e) {
                     Log.e("I wanna", "die");
                 }
@@ -100,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                                RadioGroup radioGroup = findViewById(R.id.userPokemonList);
                                int radioId = radioGroup.getCheckedRadioButtonId();
                                selectedPokemon = findViewById(radioId);
-
+                               String test = selectedPokemon.getText().toString();
                                //GameActivity gameLogic = new GameActivity();
 
                                //PokeApi pokeApi = new PokeApiClient();
@@ -110,22 +92,27 @@ public class MainActivity extends AppCompatActivity {
 
                                //String url = "https://pokeapi.co/api/v2/move?offset=0&limit=700";
 
-                               System.out.println(move1);
-                               System.out.println(dataReceived);
+
                                setContentView(R.layout.fight_screen);
                                Button moveTL = findViewById(R.id.moveTL);
                                Button moveTR = findViewById(R.id.moveTR);
                                Button moveBL = findViewById(R.id.moveBL);
                                Button moveBR = findViewById(R.id.moveBR);
-                               moveTL.setVisibility(View.VISIBLE);
-                               moveTR.setVisibility(View.VISIBLE);
-                               moveBL.setVisibility(View.VISIBLE);
-                               moveBR.setVisibility(View.VISIBLE);
-                               Example test = new Example(array);
-                               moveTL.setText(test.findMove(246));
-                               moveTR.setText(test.findMove(129));
-                               moveBL.setText(test.findMove(43));
-                               moveBR.setText(test.findMove(62));
+                               //moveTL.setVisibility(View.VISIBLE);
+                               //moveTR.setVisibility(View.VISIBLE);
+                               //moveBL.setVisibility(View.VISIBLE);
+                               //moveBR.setVisibility(View.VISIBLE);
+                               Example data = new Example();
+                               data.setmoveArray(array);
+                               //int[] one = data.moveList(selectedPokemon.getText().toString());
+                               //moveTL.setText(data.findMove(one[0]));
+                               //moveTR.setText(data.findMove(one[1]));
+                               //moveBL.setText(data.findMove(one[2]));
+                               //moveBR.setText(data.findMove(one[3]));
+                               //moveTL.setText(test.findMove(246));
+                               //moveTR.setText(test.findMove(129));
+                               //moveBL.setText(test.findMove(43));
+                               //moveBR.setText(test.findMove(62));
 
                                //test.setMoveText(test.findMove(246), test.findMove(129), test.findMove(43), test.findMove(62));
                                /*
@@ -138,11 +125,11 @@ public class MainActivity extends AppCompatActivity {
                                TextView moveTL = findViewById(R.id.moveTL);
                                moveTL.setText(move1);
                                 */
-                               /**
+
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
                                startActivity(newIntent);
-                                */
+
 
 
                                /*
