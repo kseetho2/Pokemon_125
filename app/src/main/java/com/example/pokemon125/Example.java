@@ -40,6 +40,7 @@ public class Example extends AppCompatActivity {
         moveTR.setText(move2);
         moveBL.setText(move3);
         moveBR.setText(move4);
+        //change
     }
     public int[] moveList(String pokemonName) {
         int[] moveIds = new int[4];

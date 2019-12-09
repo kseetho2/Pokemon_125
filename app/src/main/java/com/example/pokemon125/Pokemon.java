@@ -245,6 +245,7 @@ public class Pokemon {
                 });
         return movedata1;
     }
+    //change
     public JsonObjectRequest getMoveData2() {
         String url = "https://pokeapi.co/api/v2/move/" + moveTwoId;
         JsonObjectRequest movedata2 = new JsonObjectRequest

@@ -312,6 +312,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
                 break;
+                //push
         }
 
         if (wasMove) {

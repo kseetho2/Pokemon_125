@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         queue.add(eevee.getMoveData2());
         queue.add(eevee.getMoveData3());
         queue.add(eevee.getMoveData4());
-        //
+        // change
 
         queue.add(garchomp.getMoveData1());
         queue.add(garchomp.getMoveData2());
