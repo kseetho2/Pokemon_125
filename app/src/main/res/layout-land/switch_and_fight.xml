@@ -56,18 +56,17 @@
                         android:id="@+id/geoffVisual"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_gravity="center">
+                        android:orientation="vertical">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/geoffSprite"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/rayquaza"
-                            android:scaleType="centerInside"
                             android:adjustViewBounds="true"
-                            />
+                            android:scaleType="centerInside"
+                            android:src="@drawable/rayquaza" />
 
                     </LinearLayout>
 
@@ -91,16 +90,16 @@
                         android:id="@+id/playerVisual"
                         android:layout_width="500dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/userSprite"
                             android:layout_width="400dp"
                             android:layout_height="match_parent"
-                            android:src="@drawable/eevee_back"
+                            android:adjustViewBounds="true"
                             android:scaleType="centerInside"
-                            android:adjustViewBounds="true"/>
+                            android:src="@drawable/eevee_back" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -263,6 +262,14 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="HP:  314/314" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/image1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/eevee_back" />
 
                 </LinearLayout>
 
@@ -556,13 +563,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@android:dimen/thumbnail_width"
+                    android:id="@+id/switchPokeMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="\nTHE 'CHALLEN'GER WILL BE USING _______. \n\nWHICH POKEMON WILL YOU CHOOSE?"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </RelativeLayout>

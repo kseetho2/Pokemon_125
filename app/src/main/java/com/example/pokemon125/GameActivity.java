@@ -75,6 +75,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView playerSecondRow;
     private GifImageView geoffSprite; //7up
     private GifImageView userSprite; //7up
+    private TextView switchPokeMessage; //7up
 
     private ViewFlipper viewFlipper;
 
@@ -113,6 +114,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         playerSecondRow = findViewById(R.id.playerSecondRow);
         geoffSprite = findViewById(R.id.geoffSprite); //7up
         userSprite = findViewById(R.id.userSprite); //7up
+        switchPokeMessage = findViewById(R.id.switchPokeMessage); //7up
 
         Intent intent = getIntent();
         String currentSelection = intent.getStringExtra("selectedPokemon");
@@ -273,6 +275,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.switchP:
                 viewFlipper.showPrevious();
                 updatePokemonSelection();
+                String pokeName = "";
+                if (geoffPokeCount == 0) {
+                    pokeName = "RAYQUAZA";
+                } else if (geoffPokeCount == 1) {
+                    pokeName = "PORYGON";
+                } else if (geoffPokeCount == 2) {
+                    pokeName = "ENTEI";
+                } else if (geoffPokeCount == 3) {
+                    pokeName = "MR. MIME";
+                } else if (geoffPokeCount == 4) {
+                    pokeName = "DIALGA";
+                } else if (geoffPokeCount == 5) {
+                    pokeName = "MEWTWO";
+                }
+                switchPokeMessage.setText("\nTHE 'CHALLEN'GER WILL BE USING " + geoffCurrent.getName() + " ( " + pokeName + "). \n\nWHICH POKEMON WILL YOU CHOOSE?");
                 break;
             case R.id.run:
                 message.setText("Don't run! You can do it! The CS 125 staff believes in you!");

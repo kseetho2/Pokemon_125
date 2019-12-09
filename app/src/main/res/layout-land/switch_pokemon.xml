@@ -342,11 +342,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+            android:id="@+id/switchPokeMessage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@android:dimen/thumbnail_width"
-            android:text="\nTHE 'CHALLEN'GER WILL BE USING _______. \n\nWHICH POKEMON WILL YOU CHOOSE?"
+            android:text="\nTHE 'CHALLEN'GER WILL BE USING MACHINE PROJECT 0 (RAYQUAZA). \n\nWHICH POKEMON WILL YOU CHOOSE?"
             android:textAlignment="center"
             android:textSize="18sp" />
     </LinearLayout>
