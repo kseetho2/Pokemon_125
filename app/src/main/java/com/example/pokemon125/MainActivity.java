@@ -2,7 +2,6 @@ package com.example.pokemon125;
 
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import com.android.volley.toolbox.Volley;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.provider.MediaStore;
 import android.util.Log;
 
 import android.view.View;

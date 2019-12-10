@@ -267,25 +267,45 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.moveTL:
                 //Move 1 selected
-                userDamage = userCurrent.getMoveOnePower();
+                int type = moveTypeCheck(movelist[0]);
+                if (type == 1) {
+                    userDamage = damageCalculator(userCurrent.getMoveOnePower(), userCurrent.getAttack(), geoffCurrent.getDefense());
+                } else {
+                    userDamage = damageCalculator(userCurrent.getMoveOnePower(), userCurrent.getSpecialAttack(), geoffCurrent.getSpecialDefense());
+                }
                 userDamageName = data.findMove(movelist[0]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveTR:
                 //Move 2 selected
-                userDamage = userCurrent.getMoveTwoPower();
+                int type1 = moveTypeCheck(movelist[1]);
+                if (type1 == 1) {
+                    userDamage = damageCalculator(userCurrent.getMoveTwoPower(), userCurrent.getAttack(), geoffCurrent.getDefense());
+                } else {
+                    userDamage = damageCalculator(userCurrent.getMoveTwoPower(), userCurrent.getSpecialAttack(), geoffCurrent.getSpecialDefense());
+                }
                 userDamageName = data.findMove(movelist[1]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveBL:
                 //Move 3 selected
-                userDamage = userCurrent.getMoveThreePower();
+                int type2 = moveTypeCheck(movelist[2]);
+                if (type2 == 1) {
+                    userDamage = damageCalculator(userCurrent.getMoveThreePower(), userCurrent.getAttack(), geoffCurrent.getDefense());
+                } else {
+                    userDamage = damageCalculator(userCurrent.getMoveThreePower(), userCurrent.getSpecialAttack(), geoffCurrent.getSpecialDefense());
+                }
                 userDamageName = data.findMove(movelist[2]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveBR:
                 //Move 4 selected
-                userDamage = userCurrent.getMoveFourPower();
+                int type3 = moveTypeCheck(movelist[3]);
+                if (type3 == 1) {
+                    userDamage = damageCalculator(userCurrent.getMoveFourPower(), userCurrent.getAttack(), geoffCurrent.getDefense());
+                } else {
+                    userDamage = damageCalculator(userCurrent.getMoveFourPower(), userCurrent.getSpecialAttack(), geoffCurrent.getSpecialDefense());
+                }
                 userDamageName = data.findMove(movelist[3]).toUpperCase();
                 wasMove = true;
                 break;
@@ -339,17 +359,37 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             int geoffRandomAtk = (int) (Math.random() * 4) + 1;
             setGeoffMoves();
             if (geoffRandomAtk == 1) {
+                int type = moveTypeCheck(movelist[0]);
+                if (type == 1) {
+                    geoffDamage = damageCalculator(geoffMove1Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                } else {
+                    geoffDamage = damageCalculator(geoffMove1Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                }
                 geoffDamageName = geoffMove1Name;
-                geoffDamage = geoffMove1Dmg;
             } else if (geoffRandomAtk == 2) {
+                int type = moveTypeCheck(movelist[1]);
+                if (type == 1) {
+                    geoffDamage = damageCalculator(geoffMove2Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                } else {
+                    geoffDamage = damageCalculator(geoffMove2Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                }
                 geoffDamageName = geoffMove2Name;
-                geoffDamage = geoffMove2Dmg;
             } else if (geoffRandomAtk == 3) {
+                int type = moveTypeCheck(movelist[2]);
+                if (type == 1) {
+                    geoffDamage = damageCalculator(geoffMove3Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                } else {
+                    geoffDamage = damageCalculator(geoffMove3Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                }
                 geoffDamageName = geoffMove3Name;
-                geoffDamage = geoffMove3Dmg;
             } else if (geoffRandomAtk == 4) {
+                int type = moveTypeCheck(movelist[0]);
+                if (type == 1) {
+                    geoffDamage = damageCalculator(geoffMove4Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                } else {
+                    geoffDamage = damageCalculator(geoffMove4Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                }
                 geoffDamageName = geoffMove4Name;
-                geoffDamage = geoffMove4Dmg;
             }
 
             wholeScreen.setOnClickListener(new View.OnClickListener() {
@@ -450,7 +490,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                                         geoffSprite.setImageResource(R.drawable.mr_mime);
                                     } else if (geoffPokeCount == 4) {
                                         geoffSprite.setImageResource(R.drawable.dialga);
-                                    } else if (geoffPokeCount == 1) {
+                                    } else if (geoffPokeCount == 5) {
                                         geoffSprite.setImageResource(R.drawable.mewtwo);
                                     }
                                     setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
@@ -489,17 +529,37 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         int geoffRandomAtk = (int) (Math.random() * 4) + 1;
                         setGeoffMoves();
                         if (geoffRandomAtk == 1) {
+                            int type = moveTypeCheck(movelist[0]);
+                            if (type == 1) {
+                                geoffDamage = damageCalculator(geoffMove1Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                            } else {
+                                geoffDamage = damageCalculator(geoffMove1Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                            }
                             geoffDamageName = geoffMove1Name;
-                            geoffDamage = geoffMove1Dmg;
                         } else if (geoffRandomAtk == 2) {
+                            int type = moveTypeCheck(movelist[1]);
+                            if (type == 1) {
+                                geoffDamage = damageCalculator(geoffMove2Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                            } else {
+                                geoffDamage = damageCalculator(geoffMove2Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                            }
                             geoffDamageName = geoffMove2Name;
-                            geoffDamage = geoffMove2Dmg;
                         } else if (geoffRandomAtk == 3) {
+                            int type = moveTypeCheck(movelist[2]);
+                            if (type == 1) {
+                                geoffDamage = damageCalculator(geoffMove3Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                            } else {
+                                geoffDamage = damageCalculator(geoffMove3Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                            }
                             geoffDamageName = geoffMove3Name;
-                            geoffDamage = geoffMove3Dmg;
                         } else if (geoffRandomAtk == 4) {
+                            int type = moveTypeCheck(movelist[0]);
+                            if (type == 1) {
+                                geoffDamage = damageCalculator(geoffMove4Dmg, geoffCurrent.getAttack(), userCurrent.getDefense());
+                            } else {
+                                geoffDamage = damageCalculator(geoffMove4Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
+                            }
                             geoffDamageName = geoffMove4Name;
-                            geoffDamage = geoffMove4Dmg;
                         }
 
                         wholeScreen.setOnClickListener(new View.OnClickListener() {
@@ -678,10 +738,27 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         geoffMove2Name = data.findMove(movelist[1]).toUpperCase();
         geoffMove3Name = data.findMove(movelist[2]).toUpperCase();
         geoffMove4Name = data.findMove(movelist[3]).toUpperCase();
-        geoffMove1Dmg = userCurrent.getMoveOnePower();
-        geoffMove2Dmg = userCurrent.getMoveTwoPower();
-        geoffMove3Dmg = userCurrent.getMoveThreePower();
-        geoffMove4Dmg = userCurrent.getMoveFourPower();
+        geoffMove1Dmg = geoffCurrent.getMoveOnePower();
+        geoffMove2Dmg = geoffCurrent.getMoveTwoPower();
+        geoffMove3Dmg = geoffCurrent.getMoveThreePower();
+        geoffMove4Dmg = geoffCurrent.getMoveFourPower();
+    }
+    public int moveTypeCheck(int input) {
+        int[] specialMoves = new int[]{434, 128, 125, 433, 246, 62, 55,
+                57, 410, 337, 351, 413, 160, 283, 325, 93, 92, 458, 245, 407, 247, 395};
+        for (int i = 0; i < specialMoves.length; i++) {
+            if (specialMoves[i] == input) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+    public int damageCalculator(int moveDamage, int offense, int defense) {
+        int damage;
+        int var1 = 42;
+        int var2 = moveDamage * offense / defense;
+        damage = ((var1 * var2) / 50) + 2;
+        return damage;
     }
 
     /**
@@ -696,20 +773,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         move3.setText(userCurrent.getMove3());
         TextView move4 = findViewById(R.id.moveBR);
         move4.setText(userCurrent.getMove4());
-        /*
-        ConstraintLayout parent = findViewById(R.id.playerOptions);
-        //parent.removeAllViews();
-        View messageChunk = getLayoutInflater().inflate(R.layout.chunk_player_options, parent, false);
-        TextView move1 = messageChunk.findViewById(R.id.moveTL);
-        move1.setText(userCurrent.getMove1());
-        TextView move2 = messageChunk.findViewById(R.id.moveTR);
-        move2.setText(userCurrent.getMove2());
-        TextView move3 = messageChunk.findViewById(R.id.moveBL);
-        move3.setText(userCurrent.getMove3());
-        TextView move4 = messageChunk.findViewById(R.id.moveBR);
-        move4.setText(userCurrent.getMove4());
-        parent.addView(messageChunk);
-         */
     }
 
     @Override
@@ -744,4 +807,5 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
          */
     }
+
 }

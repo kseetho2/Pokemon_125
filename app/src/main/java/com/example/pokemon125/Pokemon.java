@@ -33,29 +33,37 @@ public class Pokemon {
     //Pokemon Move Related Variables
     private int moveOneId;
     private int moveOnePower;
-    private int moveOneAcc;
-    private int moveOnePP;
+
 
 
     private int moveTwoId;
     private int moveTwoPower;
-    private int moveTwoAcc;
-    private int moveTwoPP;
+
 
     private int moveThreeId;
     private int moveThreePower;
-    private int moveThreeAcc;
-    private int moveThreePP;
+
 
     private int moveFourId;
     private int moveFourPower;
-    private int moveFourAcc;
-    private int moveFourPP;
+
     // Data Retrieval Related Variables
     private static JSONObject pokeObject = new JSONObject();
     private static boolean initialSetup = false;
-    private JSONObject dataFromVollyRq;
     private JSONArray temp = new JSONArray();
+    private JSONObject dataFromVollyRq;
+
+    //Collection of Planner to use variables but unable to due to time constraints or complexity
+    /*
+    private int moveOneAcc;
+    private int moveOnePP;
+    private int moveTwoAcc;
+    private int moveTwoPP;
+    private int moveThreeAcc;
+    private int moveThreePP;
+    private int moveFourAcc;
+    private int moveFourPP;
+     */
 
 
     /**
@@ -153,7 +161,6 @@ public class Pokemon {
     public String getName() { return name; }
 
     //Move Related Methods
-
     public String getMove1() { return findMove(moveOneId); }
     public int getMoveOnePower() {
         try {
@@ -164,13 +171,8 @@ public class Pokemon {
         }
         return 0;
     }
-
-    public int getMoveOneAcc() { return moveOneAcc; }
-    public int getMoveOnePP() { return moveOnePP; }
-    public void setMoveOnePower(int power) {moveOnePower = power; }
-    public void setMoveOneAcc(int accuracy){moveOneAcc = accuracy; }
-    public void setMoveOnePP(int pp) {moveOnePP = pp; }
-
+    //public int getMoveOneAcc() { return moveOneAcc; }
+    //public int getMoveOnePP() { return moveOnePP; }
 
     public String getMove2() { return findMove(moveTwoId); }
     public int getMoveTwoPower() {
@@ -181,8 +183,8 @@ public class Pokemon {
         }
         return 0;
     }
-    public int getMoveTwoAcc() { return moveTwoAcc; }
-    public int getMoveTwoPP() { return moveTwoPP; }
+    //public int getMoveTwoAcc() { return moveTwoAcc; }
+    //public int getMoveTwoPP() { return moveTwoPP; }
 
     public String getMove3() { return findMove(moveThreeId); }
     public int getMoveThreePower() {
@@ -193,8 +195,8 @@ public class Pokemon {
         }
         return 0;
     }
-    public int getMoveThreeAcc() { return moveThreeAcc; }
-    public int getMoveThreePP() { return moveThreePP; }
+    //public int getMoveThreeAcc() { return moveThreeAcc; }
+    //public int getMoveThreePP() { return moveThreePP; }
 
     public String getMove4() { return findMove(moveFourId); }
     public int getMoveFourPower() {
@@ -205,8 +207,8 @@ public class Pokemon {
         }
         return 0;
     }
-    public int getMoveFourAcc() { return moveFourAcc; }
-    public int getMoveFourPP() { return moveFourPP; }
+    //public int getMoveFourAcc() { return moveFourAcc; }
+    //public int getMoveFourPP() { return moveFourPP; }
 
     public String findMove(int input) {
         JSONArray array;
