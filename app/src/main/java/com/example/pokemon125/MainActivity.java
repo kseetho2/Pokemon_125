@@ -1,11 +1,7 @@
 package com.example.pokemon125;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 
-import android.content.res.Resources;
-import android.media.AudioManager;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -16,10 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import android.util.Log;
 
@@ -37,8 +30,6 @@ import org.json.JSONArray;
 
 import org.json.JSONObject;
 
-
-
 import me.sargunvohra.lib.pokekotlin.client.PokeApi;
 
 
@@ -55,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MediaPlayer mp = new MediaPlayer();
+        mp.create(MainActivity.this, R.raw.battle_champion);
+        mp.start();
         RequestQueue queue = Volley.newRequestQueue(this);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
 
@@ -80,13 +74,18 @@ public class MainActivity extends AppCompatActivity {
         Pokemon voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
         Pokemon riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
         Pokemon torterra = new Pokemon("TORTERRA", 394, 348, 273, 339, 295, 232);
+        Pokemon rayquaza = new Pokemon("MACHINE PROJECT 0", 414, 504, 328, 504, 328, 361);
+        Pokemon porygon = new Pokemon("MACHINE PROJECT 1", 334, 240, 262, 295, 273, 196);
+        Pokemon entei = new Pokemon("MACHINE PROJECT 2", 434, 361, 295, 306, 273, 328);
+        Pokemon mrMime = new Pokemon("MACHINE PROJECT 3", 284, 207, 251, 328, 372, 306);
+        Pokemon dialga = new Pokemon("MACHINE PROJECT 4", 404, 372, 372, 438, 328, 306);
+        Pokemon mewTwo = new Pokemon("FINAL PROJECT", 416, 350, 306, 447, 306, 394);
         //
         queue.add(eevee.getMoveData1());
         queue.add(eevee.getMoveData2());
         queue.add(eevee.getMoveData3());
         queue.add(eevee.getMoveData4());
         // change
-
         queue.add(garchomp.getMoveData1());
         queue.add(garchomp.getMoveData2());
         queue.add(garchomp.getMoveData3());
@@ -112,6 +111,36 @@ public class MainActivity extends AppCompatActivity {
         queue.add(torterra.getMoveData3());
         queue.add(torterra.getMoveData4());
         //
+        queue.add(rayquaza.getMoveData1());
+        queue.add(rayquaza.getMoveData2());
+        queue.add(rayquaza.getMoveData3());
+        queue.add(rayquaza.getMoveData4());
+        //
+        queue.add(porygon.getMoveData1());
+        queue.add(porygon.getMoveData2());
+        queue.add(porygon.getMoveData3());
+        queue.add(porygon.getMoveData4());
+        //
+        queue.add(entei.getMoveData1());
+        queue.add(entei.getMoveData2());
+        queue.add(entei.getMoveData3());
+        queue.add(entei.getMoveData4());
+        //
+        queue.add(mrMime.getMoveData1());
+        queue.add(mrMime.getMoveData2());
+        queue.add(mrMime.getMoveData3());
+        queue.add(mrMime.getMoveData4());
+        //
+        queue.add(dialga.getMoveData1());
+        queue.add(dialga.getMoveData2());
+        queue.add(dialga.getMoveData3());
+        queue.add(dialga.getMoveData4());
+        //
+        queue.add(mewTwo.getMoveData1());
+        queue.add(mewTwo.getMoveData2());
+        queue.add(mewTwo.getMoveData3());
+        queue.add(mewTwo.getMoveData4());
+        //
         queue.add(stringRequest);
         mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
             public void onClick(View v) {
@@ -128,31 +157,8 @@ public class MainActivity extends AppCompatActivity {
                                RadioGroup radioGroup = findViewById(R.id.userPokemonList);
                                int radioId = radioGroup.getCheckedRadioButtonId();
                                selectedPokemon = findViewById(radioId);
-                               String test = selectedPokemon.getText().toString();
-
-
-                               Button moveTL = findViewById(R.id.moveTL);
-                               Button moveTR = findViewById(R.id.moveTR);
-                               Button moveBL = findViewById(R.id.moveBL);
-                               Button moveBR = findViewById(R.id.moveBR);
-                               //moveTL.setVisibility(View.VISIBLE);
-                               //moveTR.setVisibility(View.VISIBLE);
-                               //moveBL.setVisibility(View.VISIBLE);
-                               //moveBR.setVisibility(View.VISIBLE);
                                Example data = new Example();
                                data.setmoveArray(array);
-                               //int[] one = data.moveList(selectedPokemon.getText().toString());
-                               //moveTL.setText(data.findMove(one[0]));
-                               //moveTR.setText(data.findMove(one[1]));
-                               //moveBL.setText(data.findMove(one[2]));
-                               //moveBR.setText(data.findMove(one[3]));
-                               //moveTL.setText(test.findMove(246));
-                               //moveTR.setText(test.findMove(129));
-                               //moveBL.setText(test.findMove(43));
-                               //moveBR.setText(test.findMove(62));
-
-
-
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
                                startActivity(newIntent);

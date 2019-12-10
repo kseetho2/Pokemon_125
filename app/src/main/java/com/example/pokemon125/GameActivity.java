@@ -32,7 +32,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private List<Pokemon> userLineup;
     private Pokemon userCurrent;
 
-    private Pokemon ekans;
+    private Pokemon Rayquaza;
     private Pokemon porygon;
     private Pokemon entei;
     private Pokemon mrMime;
@@ -85,31 +85,26 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
-        //eevee.getMoveData();
         garchomp = new Pokemon("GARCHOMP", 420, 482, 361, 372, 317, 311);
-        //garchomp.getMoveData();
         greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
-        //greninja.getMoveData();
         voltorb = new Pokemon("VOLTORB", 284, 174, 218, 229, 229, 328);
-        //voltorb.getMoveData();
         riolu = new Pokemon("RAMICU", 284, 262, 196, 185, 196, 240);
-        //riolu.getMoveData();
         torterra = new Pokemon("TORTERRA", 394, 348, 273, 339, 295, 232);
-        //torterra.getMoveData();
+        //
         userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, torterra);
         userFaintCount = 0;
-
-        ekans = new Pokemon("MACHINE PROJECT 0", 274, 240, 205, 196, 227, 229);
+        //
+        Rayquaza = new Pokemon("MACHINE PROJECT 0", 414, 504, 328, 504, 328, 361);
         porygon = new Pokemon("MACHINE PROJECT 1", 334, 240, 262, 295, 273, 196);
         entei = new Pokemon("MACHINE PROJECT 2", 434, 361, 295, 306, 273, 328);
         mrMime = new Pokemon("MACHINE PROJECT 3", 284, 207, 251, 328, 372, 306);
         dialga = new Pokemon("MACHINE PROJECT 4", 404, 372, 372, 438, 328, 306);
         mewTwo = new Pokemon("FINAL PROJECT", 416, 350, 306, 447, 306, 394);
-
-        geoffLineup = Arrays.asList(ekans, porygon, entei, mrMime, dialga, mewTwo);
+        //
+        geoffLineup = Arrays.asList(Rayquaza, porygon, entei, mrMime, dialga, mewTwo);
         geoffPokeCount = 0;
         geoffCurrent = geoffLineup.get(geoffPokeCount);
-
+        //
         setContentView(R.layout.switch_and_fight);
         viewFlipper = findViewById(R.id.view_flipper);
         move1 = findViewById(R.id.moveTL);
@@ -259,7 +254,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             move4.setText(data.findMove(movelist[3]));
         }
         if (pokemonName.equals("TORTERRA")) {
-            userCurrent = eevee;
+            userCurrent = torterra;
             movelist = data.moveList("TORTERRA");
             move1.setText(data.findMove(movelist[0]));
             move2.setText(data.findMove(movelist[1]));
