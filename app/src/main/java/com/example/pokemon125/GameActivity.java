@@ -79,6 +79,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private GifImageView userSprite; //7up
     private TextView switchPokeMessage; //7up
 
+    boolean switchedByChoice = false;
+
     private ViewFlipper viewFlipper;
 
     @Override
@@ -144,7 +146,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void playerOptions() {
-        message.setText("What will \n" + userCurrent.getName() + " do?");
+        if (switchedByChoice) {
+            message.setText("You switched Pokemon!");
+        } else {
+            message.setText("What will \n" + userCurrent.getName() + " do?");
+        }
         showMessage();
         showOptions();
         fightOption.setOnClickListener(this);
@@ -220,58 +226,33 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (pokemonName.equals("FLUFFY")) {
             userCurrent = eevee;
-            movelist = data.moveList("FLUFFY");
-            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
-            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
-            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
-            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
             userSprite.setImageResource(R.drawable.eevee_back); //7up
         }
         if (pokemonName.equals("GARCHOMP")) {
             userCurrent = garchomp;
-            movelist = data.moveList("GARCHOMP");
-            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
-            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
-            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
-            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
             userSprite.setImageResource(R.drawable.garchomp_back); //7up
         }
         if (pokemonName.equals("NARUTO")) {
             userCurrent = greninja;
-            movelist = data.moveList("NARUTO");
-            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
-            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
-            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
-            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
             userSprite.setImageResource(R.drawable.greninja_back); //7up
         }
         if (pokemonName.equals("VOLTORB")) {
             userCurrent = voltorb;
-            movelist = data.moveList("VOLTORB");
-            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
-            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
-            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
-            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
             userSprite.setImageResource(R.drawable.voltorb_back); //7up
         }
         if (pokemonName.equals("RAMICU")) {
             userCurrent = riolu;
-            movelist = data.moveList("RAMICU");
-            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
-            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
-            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
-            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
             userSprite.setImageResource(R.drawable.riolu_back); //7up
         }
         if (pokemonName.equals("TORTERRA")) {
             userCurrent = torterra;
-            movelist = data.moveList("TORTERRA");
-            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
-            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
-            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
-            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
             userSprite.setImageResource(R.drawable.torterra_back); //7up
         }
+        movelist = data.moveList(userCurrent.getName());
+        move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+        move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+        move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+        move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
     }
     @Override
     public void onClick(View v) {
@@ -334,6 +315,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     pokeName = "MEWTWO";
                 }
                 switchPokeMessage.setText("\nTHE 'CHALLEN'GER WILL BE USING " + geoffCurrent.getName() + " ( " + pokeName + "). \n\nWHICH POKEMON WILL YOU CHOOSE?");
+                switchedByChoice = true;
                 break;
             case R.id.run:
                 message.setText("Don't run! You can do it! The CS 125 staff believes in you!");
@@ -346,6 +328,91 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 break;
                 //push
+        }
+
+        if (switchedByChoice) {
+            message.setText( "You switched to " + userCurrent.getName() + "!");
+            int geoffRandomAtk = (int) (Math.random() * 4) + 1;
+            setGeoffMoves();
+            if (geoffRandomAtk == 1) {
+                geoffDamageName = geoffMove1Name;
+                geoffDamage = geoffMove1Dmg;
+            } else if (geoffRandomAtk == 2) {
+                geoffDamageName = geoffMove2Name;
+                geoffDamage = geoffMove2Dmg;
+            } else if (geoffRandomAtk == 3) {
+                geoffDamageName = geoffMove3Name;
+                geoffDamage = geoffMove3Dmg;
+            } else if (geoffRandomAtk == 4) {
+                geoffDamageName = geoffMove4Name;
+                geoffDamage = geoffMove4Dmg;
+            }
+
+            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
+                    if (checkUserFaint()) {
+                        if (userFaintCount == 6) {
+                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    message.setText("Oh no! All your staff members have fainted!");
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            setContentView(R.layout.end_screen);
+                                            TextView endText = findViewById(R.id.endScreenText);
+                                            endText.setTextSize(50);
+                                            endText.setText("You lost to the 'CHALLEN'GER! Do some more PrairieLearn problems and try again!");
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
+                                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    viewFlipper.showPrevious();
+                                                    updatePokemonSelection();
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                            switchedByChoice = false;
+                        }
+                    } else {
+                        message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                        setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        playerOptions();
+                                    }
+                                });
+                            }
+                        });
+                        switchedByChoice = false;
+                    }
+                }
+            });
         }
 
         if (wasMove) {
