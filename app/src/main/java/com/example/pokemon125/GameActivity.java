@@ -153,15 +153,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void playerOptions() {
         if (switchedByChoice) {
             message.setText("You switched Pokemon!");
+            showMessage();
+            hideOptions();
         } else {
             message.setText("What will \n" + userCurrent.getName() + " do?");
+            showMessage();
+            showOptions();
+            fightOption.setOnClickListener(this);
+            cheatOption.setOnClickListener(this);
+            switchPokemonOption.setOnClickListener(this);
+            runOption.setOnClickListener(this);
         }
-        showMessage();
-        showOptions();
-        fightOption.setOnClickListener(this);
-        cheatOption.setOnClickListener(this);
-        switchPokemonOption.setOnClickListener(this);
-        runOption.setOnClickListener(this);
+
     }
 
     public void igPokemonClicked(View v) {
@@ -340,6 +343,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     pokeName = "MEWTWO";
                 }
                 switchPokeMessage.setText("\nTHE 'CHALLEN'GER WILL BE USING " + geoffCurrent.getName() + " ( " + pokeName + "). \n\nWHICH POKEMON WILL YOU CHOOSE?");
+                switchedByChoice = true;
                 break;
             case R.id.run:
                 message.setText("Don't run! You can do it! The CS 125 staff believes in you!");
@@ -560,6 +564,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                                 geoffDamage = damageCalculator(geoffMove4Dmg, geoffCurrent.getSpecialAttack(), userCurrent.getSpecialDefense());
                             }
                             geoffDamageName = geoffMove4Name;
+
                         }
 
                         wholeScreen.setOnClickListener(new View.OnClickListener() {
@@ -627,7 +632,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     }
                 });
-
             }
         }
     }
