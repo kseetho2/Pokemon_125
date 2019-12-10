@@ -143,15 +143,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void playerOptions() {
         if (switchedByChoice) {
             message.setText("You switched Pokemon!");
+            showMessage();
+            hideOptions();
         } else {
             message.setText("What will \n" + userCurrent.getName() + " do?");
+            showMessage();
+            showOptions();
+            fightOption.setOnClickListener(this);
+            cheatOption.setOnClickListener(this);
+            switchPokemonOption.setOnClickListener(this);
+            runOption.setOnClickListener(this);
         }
-        showMessage();
-        showOptions();
-        fightOption.setOnClickListener(this);
-        cheatOption.setOnClickListener(this);
-        switchPokemonOption.setOnClickListener(this);
-        runOption.setOnClickListener(this);
+
     }
 
     public void igPokemonClicked(View v) {
@@ -326,7 +329,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (switchedByChoice) {
-            message.setText( "You switched to " + userCurrent.getName() + "!");
             int geoffRandomAtk = (int) (Math.random() * 4) + 1;
             setGeoffMoves();
             if (geoffRandomAtk == 1) {
@@ -661,10 +663,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         geoffMove2Name = data.findMove(movelist[1]).toUpperCase();
         geoffMove3Name = data.findMove(movelist[2]).toUpperCase();
         geoffMove4Name = data.findMove(movelist[3]).toUpperCase();
-        geoffMove1Dmg = userCurrent.getMoveOnePower();
-        geoffMove2Dmg = userCurrent.getMoveTwoPower();
-        geoffMove3Dmg = userCurrent.getMoveThreePower();
-        geoffMove4Dmg = userCurrent.getMoveFourPower();
+        geoffMove1Dmg = geoffCurrent.getMoveOnePower();
+        geoffMove2Dmg = geoffCurrent.getMoveTwoPower();
+        geoffMove3Dmg = geoffCurrent.getMoveThreePower();
+        geoffMove4Dmg = geoffCurrent.getMoveFourPower();
     }
 
     /**

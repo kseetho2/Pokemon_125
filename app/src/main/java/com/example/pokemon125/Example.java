@@ -30,6 +30,7 @@ public class Example extends AppCompatActivity {
         }
         return move;
     }
+    /*
     public void setMoveText(String move1, String move2, String move3, String move4) {
         setContentView(R.layout.fight_screen);
         Button moveTL = findViewById(R.id.moveTL);
@@ -42,6 +43,7 @@ public class Example extends AppCompatActivity {
         moveBR.setText(move4);
         //change
     }
+     */
     /**
      * All move ids here should be one less than their actual ids
      */
@@ -60,7 +62,7 @@ public class Example extends AppCompatActivity {
         } else if (pokemonName.equals("TORTERRA")) {
             moveIds = new int[]{275, 33, 337, 441};
         } else if (pokemonName.equals("MACHINE PROJECT 0")) {//Rayquaza
-            moveIds = new int[]{351, 397, 43, 50};
+            moveIds = new int[]{351, 397, 619, 413};
         } else if (pokemonName.equals("MACHINE PROJECT 1")) {//Porygon
             moveIds = new int[]{62, 160, 59, 32};
         } else if (pokemonName.equals("MACHINE PROJECT 2")) {//Entei
