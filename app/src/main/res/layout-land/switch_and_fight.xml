@@ -9,8 +9,6 @@
     <ViewFlipper
         android:id="@+id/view_flipper"
         android:layout_width="match_parent"
-
-
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -32,24 +30,37 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/geoffText"
+                        android:id="@+id/geoffTextAlign"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="50dp">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/geoffFirstRow"
+                        <LinearLayout
+                            android:id="@+id/geoffText"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="MACHINE PROJECT 0 :L100"
-                            android:textSize="18sp" />
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp">
 
-                        <TextView
-                            android:id="@+id/geoffSecondRow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="HP: 420/420" />
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp" />
+
+                            <TextView
+                                android:id="@+id/geoffFirstRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MACHINE PROJECT 0 :L100"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/geoffSecondRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="HP: 420/420" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -223,21 +234,101 @@
             android:orientation="vertical"
             tools:ignore="MissingDefaultResource">
 
-            <Space
-                android:id="@+id/emptySpace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="25dp" />
+            <LinearLayout
+                android:layout_width="567dp"
+                android:layout_height="219dp"
+                android:orientation="horizontal">
+
+                <Space
+                    android:id="@+id/emptySpace"
+                    android:layout_width="329dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="25dp" />
+
+                <LinearLayout
+                    android:id="@+id/spriteContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@+id/statsView">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/image1"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/eevee_front" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/image2"
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/garchomp_front" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/image3"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/greninja_front" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/image4"
+                        android:layout_width="35dp"
+                        android:layout_height="32dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/voltorb_front" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Space
+                            android:layout_width="7dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/image5"
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/riolu_front" />
+                    </LinearLayout>
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/image6"
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:layout_weight="0"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/torterra_front" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="189dp"
                 android:layout_marginTop="25dp"
-                android:layout_toRightOf="@+id/userPokemonList"
+                android:layout_toRightOf="@+id/igUserPokemonList"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -263,18 +354,16 @@
                         android:padding="5dp"
                         android:text="HP:  314/314" />
 
-                    <pl.droidsonroids.gif.GifImageView
-                        android:id="@+id/image1"
-                        android:layout_width="wrap_content"
+                    <Space
+                        android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/eevee_back" />
+                        android:layout_weight="0" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -299,10 +388,15 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="HP: 420/420" />
+
+                    <Space
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -327,10 +421,15 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="HP: 348/348" />
+
+                    <Space
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -355,10 +454,15 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="HP: 284/284" />
+
+                    <Space
+                        android:layout_width="34dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -383,11 +487,16 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="HP: 284/284" />
+
+                    <Space
+                        android:layout_width="21dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -395,7 +504,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="6dp"
-                        android:text="STAFF 6"
+                        android:text="MYSTERY"
                         android:textColor="#708090" />
 
                     <TextView
@@ -418,7 +527,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
 
@@ -434,7 +543,7 @@
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="YOUR POKEMON"
                 android:textSize="18sp" />

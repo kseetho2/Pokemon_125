@@ -212,7 +212,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
             playerOptions();
         } else {
-            Toast.makeText(this, "That staff member has fainted!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "That staff member's Pokemon has fainted!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -221,79 +221,86 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (pokemonName.equals("FLUFFY")) {
             userCurrent = eevee;
             movelist = data.moveList("FLUFFY");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
+            userSprite.setImageResource(R.drawable.eevee_back); //7up
         }
         if (pokemonName.equals("GARCHOMP")) {
             userCurrent = garchomp;
             movelist = data.moveList("GARCHOMP");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
+            userSprite.setImageResource(R.drawable.garchomp_back); //7up
         }
         if (pokemonName.equals("NARUTO")) {
             userCurrent = greninja;
             movelist = data.moveList("NARUTO");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
+            userSprite.setImageResource(R.drawable.greninja_back); //7up
         }
         if (pokemonName.equals("VOLTORB")) {
             userCurrent = voltorb;
             movelist = data.moveList("VOLTORB");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
+            userSprite.setImageResource(R.drawable.voltorb_back); //7up
         }
         if (pokemonName.equals("RAMICU")) {
             userCurrent = riolu;
             movelist = data.moveList("RAMICU");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
+            userSprite.setImageResource(R.drawable.riolu_back); //7up
         }
         if (pokemonName.equals("TORTERRA")) {
-            userCurrent = eevee;
+            userCurrent = torterra;
             movelist = data.moveList("TORTERRA");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+            move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+            move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+            move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
+            userSprite.setImageResource(R.drawable.torterra_back); //7up
         }
     }
     @Override
     public void onClick(View v) {
         boolean wasMove = false;
         final LinearLayout wholeScreen = findViewById(R.id.fightScreen);
+        movelist = data.moveList(userCurrent.getName());
         switch (v.getId()) {
             case R.id.moveTL:
                 //Move 1 selected
                 userDamage = userCurrent.getMoveOnePower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[0]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveTR:
                 //Move 2 selected
                 userDamage = userCurrent.getMoveTwoPower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[1]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveBL:
                 //Move 3 selected
                 userDamage = userCurrent.getMoveThreePower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[2]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveBR:
                 //Move 4 selected
                 userDamage = userCurrent.getMoveFourPower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[3]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.fight:
