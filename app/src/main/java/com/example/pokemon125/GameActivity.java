@@ -352,117 +352,143 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             geoffCurrent.setCurrentHealth(geoffCurrent.getCurrentHealth() - userDamage);
             if (checkGeoffFaint()) {
                 setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-                message.setText(userCurrent.getName() + " used " + userDamageName + "! " + geoffCurrent.getName() + " fainted!");
+                message.setText(userCurrent.getName() + " used " + userDamageName + "! ");
                 showMessage();
                 hideOptions();
-                if (!checkUserWinner()) {
-                    geoffCurrent = geoffLineup.get(geoffPokeCount); //new Pokemon
-                    wholeScreen.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            message.setText("The 'CHALLEN'GER will now use " + geoffCurrent.getName());
-                            //7up
-                            if (geoffPokeCount == 0) {
-                                geoffSprite.setImageResource(R.drawable.rayquaza);
-                            } else if (geoffPokeCount == 1) {
-                                geoffSprite.setImageResource(R.drawable.porygon);
-                            } else if (geoffPokeCount == 2) {
-                                geoffSprite.setImageResource(R.drawable.entei);
-                            } else if (geoffPokeCount == 3) {
-                                geoffSprite.setImageResource(R.drawable.mr_mime);
-                            } else if (geoffPokeCount == 4) {
-                                geoffSprite.setImageResource(R.drawable.dialga);
-                            } else if (geoffPokeCount == 1) {
-                                geoffSprite.setImageResource(R.drawable.mewtwo);
-                            }
-                            setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-                            wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    playerOptions();
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    //WIN CONDITION
-                    wholeScreen.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            setContentView(R.layout.end_screen);
-                        }
-                    });
-                }
-            } else { //battle continues
-                setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-                message.setText(userCurrent.getName() + " used " + userDamageName + "!");
-                showMessage();
-                hideOptions();
-
-                int geoffRandomAtk = (int) (Math.random() * 4) + 1;
-                setGeoffMoves();
-                if (geoffRandomAtk == 1) {
-                    geoffDamageName = geoffMove1Name;
-                    geoffDamage = geoffMove1Dmg;
-                } else if (geoffRandomAtk == 2) {
-                    geoffDamageName = geoffMove2Name;
-                    geoffDamage = geoffMove2Dmg;
-                } else if (geoffRandomAtk == 3) {
-                    geoffDamageName = geoffMove3Name;
-                    geoffDamage = geoffMove3Dmg;
-                } else if (geoffRandomAtk == 4) {
-                    geoffDamageName = geoffMove4Name;
-                    geoffDamage = geoffMove4Dmg;
-                }
-
                 wholeScreen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
-                        if (checkUserFaint()) {
-                            if (userFaintCount == 6) {
-                                message.setText("Oh no! All your staff members have fainted!");
-                                wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        setContentView(R.layout.end_screen);
-                                        TextView endText = findViewById(R.id.endScreenText);
-                                        endText.setTextSize(50);
-                                        endText.setText("You lost to the 'CHALLEN'GER! Do some more PrairieLearn problems and try again!");
-                                    }
-                                });
-                            } else {
-                                setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
-                                message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
-                                final LinearLayout wholeScreen = findViewById(R.id.fightScreen);
-                                wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
-                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                viewFlipper.showPrevious();
-                                                updatePokemonSelection();
-                                            }
-                                        });
-
-                                    }
-                                });
-                            }
-                        } else {
-                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
-                            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                        message.setText(geoffCurrent.getName() + " fainted!");
+                        if (!checkUserWinner()) {
+                            geoffCurrent = geoffLineup.get(geoffPokeCount); //new Pokemon
                             wholeScreen.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    playerOptions();
+                                    message.setText("The 'CHALLEN'GER will now use " + geoffCurrent.getName() + "!");
+                                    //7up
+                                    if (geoffPokeCount == 0) {
+                                        geoffSprite.setImageResource(R.drawable.rayquaza);
+                                    } else if (geoffPokeCount == 1) {
+                                        geoffSprite.setImageResource(R.drawable.porygon);
+                                    } else if (geoffPokeCount == 2) {
+                                        geoffSprite.setImageResource(R.drawable.entei);
+                                    } else if (geoffPokeCount == 3) {
+                                        geoffSprite.setImageResource(R.drawable.mr_mime);
+                                    } else if (geoffPokeCount == 4) {
+                                        geoffSprite.setImageResource(R.drawable.dialga);
+                                    } else if (geoffPokeCount == 1) {
+                                        geoffSprite.setImageResource(R.drawable.mewtwo);
+                                    }
+                                    setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            playerOptions();
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            //WIN CONDITION
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    setContentView(R.layout.end_screen);
                                 }
                             });
                         }
                     }
                 });
+            } else { //battle continues
+                setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                message.setText(userCurrent.getName() + " used " + userDamageName + "!");
+                showMessage();
+                hideOptions();
+                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        message.setText(geoffCurrent.getName() + " took " + userDamage + " damage!");
+                        int geoffRandomAtk = (int) (Math.random() * 4) + 1;
+                        setGeoffMoves();
+                        if (geoffRandomAtk == 1) {
+                            geoffDamageName = geoffMove1Name;
+                            geoffDamage = geoffMove1Dmg;
+                        } else if (geoffRandomAtk == 2) {
+                            geoffDamageName = geoffMove2Name;
+                            geoffDamage = geoffMove2Dmg;
+                        } else if (geoffRandomAtk == 3) {
+                            geoffDamageName = geoffMove3Name;
+                            geoffDamage = geoffMove3Dmg;
+                        } else if (geoffRandomAtk == 4) {
+                            geoffDamageName = geoffMove4Name;
+                            geoffDamage = geoffMove4Dmg;
+                        }
 
+                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
+                                if (checkUserFaint()) {
+                                    if (userFaintCount == 6) {
+                                        message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                message.setText("Oh no! All your staff members have fainted!");
+                                                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        setContentView(R.layout.end_screen);
+                                                        TextView endText = findViewById(R.id.endScreenText);
+                                                        endText.setTextSize(50);
+                                                        endText.setText("You lost to the 'CHALLEN'GER! Do some more PrairieLearn problems and try again!");
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                                        message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
+                                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                viewFlipper.showPrevious();
+                                                                updatePokemonSelection();
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                } else {
+                                    message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                                    setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    playerOptions();
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
             }
         }
     }
