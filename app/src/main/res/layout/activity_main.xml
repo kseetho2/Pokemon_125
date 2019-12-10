@@ -5,7 +5,7 @@
     android:id="@+id/mainScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/c90f9afab415aa0dcced8dad5a812d2a"
+    android:background="@drawable/pokemon125"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -22,12 +22,13 @@
         tools:context=".MainActivity"
         tools:showIn="@layout/activity_main">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/click_to_start"
-            android:textSize="50sp"
+            android:textSize="35sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.525"
             app:layout_constraintLeft_toLeftOf="parent"
