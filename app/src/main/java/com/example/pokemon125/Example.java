@@ -62,7 +62,7 @@ public class Example extends AppCompatActivity {
         } else if (pokemonName.equals("TORTERRA")) {
             moveIds = new int[]{275, 33, 337, 441};
         } else if (pokemonName.equals("MACHINE PROJECT 0")) {//Rayquaza
-            moveIds = new int[]{351, 397, 619, 413};
+            moveIds = new int[]{351, 230, 619, 413};
         } else if (pokemonName.equals("MACHINE PROJECT 1")) {//Porygon
             moveIds = new int[]{62, 160, 59, 32};
         } else if (pokemonName.equals("MACHINE PROJECT 2")) {//Entei
