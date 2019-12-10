@@ -62,6 +62,7 @@ public class Pokemon {
     private static JSONObject pokeObject = new JSONObject();
     private static boolean initialSetup = false;
     private JSONObject dataFromVollyRq;
+    private JSONArray temp = new JSONArray();
 
 
     /**
@@ -115,20 +116,6 @@ public class Pokemon {
             moveThreeId = 338; // Frenzy plant 338
             moveFourId = 442; // Iron head 442
         }
-        if (initialSetup) {
-            JSONArray myArray = new JSONArray();
-            try {
-                pokeObject.put("FLUFFY", myArray);
-                pokeObject.put("VOLTORB", myArray);
-                pokeObject.put("GARCHOMP", myArray);
-                pokeObject.put("NARUTO", myArray);
-                pokeObject.put("RIMACU", myArray);
-                pokeObject.put("TORTERRA", myArray);
-            } catch (Exception e) {
-                System.out.println("error pokemon initial set up");
-            }
-            initialSetup = true;
-        }
     }
 
     //Pokemon Related Methods
@@ -144,10 +131,11 @@ public class Pokemon {
 
     //Move Related Methods
 
-    public String getMove1() { return findMove(moveOneId - 1); }
+    public String getMove1() { return findMove(moveOneId); }
     public int getMoveOnePower() {
         try {
-            return pokeObject.getInt("move1");
+
+            return pokeObject.getJSONArray(getName()).getInt(0);
         } catch (Exception e) {
             System.out.println("did not work");
         }
@@ -161,10 +149,10 @@ public class Pokemon {
     public void setMoveOnePP(int pp) {moveOnePP = pp; }
 
 
-    public String getMove2() { return findMove(moveTwoId - 1); }
+    public String getMove2() { return findMove(moveTwoId); }
     public int getMoveTwoPower() {
         try {
-            return pokeObject.getInt("move2");
+            return pokeObject.getJSONArray(getName()).getInt(1);
         } catch (Exception e) {
             System.out.println("did not work");
         }
@@ -173,10 +161,10 @@ public class Pokemon {
     public int getMoveTwoAcc() { return moveTwoAcc; }
     public int getMoveTwoPP() { return moveTwoPP; }
 
-    public String getMove3() { return findMove(moveThreeId - 1); }
+    public String getMove3() { return findMove(moveThreeId); }
     public int getMoveThreePower() {
         try {
-            return pokeObject.getInt("move3");
+            return pokeObject.getJSONArray(getName()).getInt(2);
         } catch (Exception e) {
             System.out.println("did not work");
         }
@@ -185,10 +173,10 @@ public class Pokemon {
     public int getMoveThreeAcc() { return moveThreeAcc; }
     public int getMoveThreePP() { return moveThreePP; }
 
-    public String getMove4() { return findMove(moveFourId - 1); }
+    public String getMove4() { return findMove(moveFourId); }
     public int getMoveFourPower() {
         try {
-            return pokeObject.getInt("move4");
+            return pokeObject.getJSONArray(getName()).getInt(3);
         } catch (Exception e) {
             System.out.println("did not work");
         }
@@ -221,11 +209,8 @@ public class Pokemon {
                     public void onResponse(JSONObject response) {
                         try {
                             moveOnePower = response.getInt("power");
-                            pokeObject.put("move1", moveOnePower);
-                            //moveOneAcc = response.getInt("accuracy");
-                            //moveOnePP = response.getInt("pp");
-                            //pokeObject.getJSONArray(currentPokemon).put(1, moveOneAcc);
-                            //pokeObject.getJSONArray(currentPokemon).put(2, moveOnePP);
+                            temp.put(0, moveOnePower);
+                            pokeObject.put(getName(), temp);
                         } catch (Exception e) {
                             Log.e("Poke 125", "move 1 data request failed for " + getName());
 
@@ -250,7 +235,8 @@ public class Pokemon {
                     public void onResponse(JSONObject response) {
                         try {
                             moveTwoPower = response.getInt("power");
-                            pokeObject.put("move2", moveTwoPower);
+                            temp.put(1, moveTwoPower);
+                            pokeObject.put(getName(), temp);
                             //moveTwoAcc = response.getInt("accuracy");
                             //moveTwoPP = response.getInt("pp");
                         } catch (Exception e) {
@@ -275,7 +261,8 @@ public class Pokemon {
                     public void onResponse(JSONObject response) {
                         try {
                             moveThreePower = response.getInt("power");
-                            pokeObject.put("move3", moveThreePower);
+                            temp.put(2, moveThreePower);
+                            pokeObject.put(getName(), temp);
                             //moveThreeAcc = response.getInt("accuracy");
                             //moveThreePP = response.getInt("pp");
                         } catch (Exception e) {
@@ -300,7 +287,8 @@ public class Pokemon {
                     public void onResponse(JSONObject response) {
                         try {
                             moveFourPower = response.getInt("power");
-                            pokeObject.put("move4", moveFourPower);
+                            temp.put(3, moveFourPower);
+                            pokeObject.put(getName(), temp);
                             //moveFourAcc = response.getInt("accuracy");
                             //moveFourPP = response.getInt("pp");
                         } catch (Exception e) {

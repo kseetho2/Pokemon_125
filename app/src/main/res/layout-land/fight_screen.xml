@@ -129,36 +129,36 @@
             android:layout_width="240dp"
             android:layout_height="78dp"
             android:text="@string/move_4"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/moveBL"
-            android:visibility="invisible"/>
+            app:layout_constraintStart_toEndOf="@+id/moveBL" />
 
         <Button
             android:id="@+id/moveBL"
             android:layout_width="240dp"
             android:layout_height="77dp"
             android:text="@string/move_3"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:visibility="invisible"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/moveTL"
             android:layout_width="240dp"
             android:layout_height="77dp"
             android:text="@string/move_1"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/moveBL"
-            app:layout_constraintStart_toStartOf="parent"
-            android:visibility="invisible"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/moveTR"
             android:layout_width="240dp"
             android:layout_height="77dp"
             android:text="@string/move_2"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/moveBR"
-            app:layout_constraintStart_toEndOf="@+id/moveTL"
-            android:visibility="invisible"/>
+            app:layout_constraintStart_toEndOf="@+id/moveTL" />
 
         <Button
             android:id="@+id/fight"

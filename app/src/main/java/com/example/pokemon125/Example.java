@@ -49,13 +49,13 @@ public class Example extends AppCompatActivity {
         } else if (pokemonName.equals("NARUTO")) {
             moveIds = new int[]{415, 55, 399, 57};
         } else if (pokemonName.equals("GARCHOMP")) {
-            moveIds = new int[]{406, 241, 125, 432};
+            moveIds = new int[]{406, 241, 125, 433};
         } else if (pokemonName.equals("VOLTORB")) {
             moveIds = new int[]{434, 152, 204, 128};
         } else if (pokemonName.equals("RAMICU")) {
-            moveIds = new int[]{398, 156, 410, 88};
+            moveIds = new int[]{397, 156, 410, 88};
         } else if (pokemonName.equals("TORTERRA")) {
-            moveIds = new int[]{275, 33, 338, 441};
+            moveIds = new int[]{275, 33, 337, 441};
         }
         return moveIds;
     }
