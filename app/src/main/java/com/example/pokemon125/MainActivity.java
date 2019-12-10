@@ -40,15 +40,13 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject object;
     private JSONArray array;
     private boolean dataReceived = false;
+    MediaPlayer mp;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MediaPlayer mp = new MediaPlayer();
-        mp.create(MainActivity.this, R.raw.battle_champion);
-        mp.start();
         RequestQueue queue = Volley.newRequestQueue(this);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
 
@@ -162,10 +160,6 @@ public class MainActivity extends AppCompatActivity {
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
                                startActivity(newIntent);
-
-
-
-
                            }
                         });
                     }
@@ -205,6 +199,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }

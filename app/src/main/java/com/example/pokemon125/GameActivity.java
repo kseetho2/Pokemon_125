@@ -1,6 +1,7 @@
 package com.example.pokemon125;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Pokemon torterra;
     private List<Pokemon> userLineup;
     private Pokemon userCurrent;
+
 
     private Pokemon Rayquaza;
     private Pokemon porygon;
@@ -80,10 +82,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView switchPokeMessage; //7up
 
     private ViewFlipper viewFlipper;
+    MediaPlayer mp;
+    private boolean isPlaying = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mp = MediaPlayer.create(this, R.raw.battle_champion);
+        mp.setLooping(true);
+        mp.start();
         eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
         garchomp = new Pokemon("GARCHOMP", 420, 482, 361, 372, 317, 311);
         greninja = new Pokemon("NARUTO", 348, 317, 256, 335, 265, 377);
@@ -377,7 +384,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     wholeScreen.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            mp.setLooping(false);
+                            mp.stop();
                             setContentView(R.layout.end_screen);
+
                         }
                     });
                 }
@@ -592,5 +602,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         move4.setText(userCurrent.getMove4());
         parent.addView(messageChunk);
          */
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isPlaying) {
+            mp.pause();
+            isPlaying = false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isPlaying) {
+            mp.start();
+        }
     }
 }
