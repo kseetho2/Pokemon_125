@@ -10,6 +10,91 @@
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:id="@+id/spriteContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@+id/statsView">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/image1"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/eevee_front" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/image2"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/garchomp_front" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/image3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/greninja_front" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/image4"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/voltorb_front" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="7dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/image5"
+                    android:layout_width="22dp"
+                    android:layout_height="32dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/riolu_front" />
+            </LinearLayout>
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/image6"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/torterra_front" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <Space
         android:id="@+id/emptySpace"
         android:layout_width="match_parent"
@@ -17,14 +102,15 @@
         android:minHeight="25dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/statsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_toRightOf="@+id/userPokemonList"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -50,10 +136,15 @@
                 android:padding="5dp"
                 android:text="HP:  314/314" />
 
+            <Space
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -78,11 +169,18 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="HP: 420/420" />
+
+            <Space
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:orientation="horizontal">
 
             <TextView
@@ -106,10 +204,16 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="HP: 348/348" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -134,10 +238,15 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="HP: 284/284" />
+
+            <Space
+                android:layout_width="34dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -162,11 +271,17 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="HP: 284/284" />
+
+            <Space
+                android:layout_width="21dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
             android:orientation="horizontal">
 
             <TextView
@@ -174,7 +289,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:text="STAFF 6"
+                android:text="MYSTERY"
                 android:textColor="#708090" />
 
             <TextView
@@ -208,12 +323,13 @@
             android:layout_marginTop="210dp"
             android:layout_weight="1"
             android:text="I CHOOSE YOU!" />
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="YOUR POKEMON"
         android:textSize="18sp" />
@@ -345,7 +461,7 @@
             android:id="@+id/switchPokeMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\nTHE 'CHALLEN'GER WILL BE USING MACHINE PROJECT 0 (RAYQUAZA). \n\nWHICH POKEMON WILL YOU CHOOSE?"
+            android:text="\n\nThe 'CHALLEN'GER will be using MACHINE PROJECT 0 (RAYQUAZA). \n\nWhich Pokemon will you choose?"
             android:textAlignment="center"
             android:textSize="18sp" />
     </LinearLayout>

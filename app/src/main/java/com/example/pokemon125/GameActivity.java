@@ -33,8 +33,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private List<Pokemon> userLineup;
     private Pokemon userCurrent;
 
-
-    private Pokemon Rayquaza;
+    private Pokemon rayquaza;
     private Pokemon porygon;
     private Pokemon entei;
     private Pokemon mrMime;
@@ -81,14 +80,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private GifImageView userSprite; //7up
     private TextView switchPokeMessage; //7up
 
+    boolean switchedByChoice = false;
+
     private ViewFlipper viewFlipper;
     MediaPlayer mp;
+    MediaPlayer victory;
+    MediaPlayer defeat;
     private boolean isPlaying = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mp = MediaPlayer.create(this, R.raw.battle_champion);
+        victory = MediaPlayer.create(this, R.raw.fortnite_dance);
+        defeat = MediaPlayer.create(this, R.raw.sad_violin_mlg);
         mp.setLooping(true);
         mp.start();
         eevee = new Pokemon("FLUFFY", 314, 229, 218, 207, 251, 229);
@@ -101,14 +106,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         userLineup = Arrays.asList(eevee, garchomp, greninja, voltorb, riolu, torterra);
         userFaintCount = 0;
         //
-        Rayquaza = new Pokemon("MACHINE PROJECT 0", 414, 504, 328, 504, 328, 361);
+        rayquaza = new Pokemon("MACHINE PROJECT 0", 414, 504, 328, 504, 328, 361);
         porygon = new Pokemon("MACHINE PROJECT 1", 334, 240, 262, 295, 273, 196);
         entei = new Pokemon("MACHINE PROJECT 2", 434, 361, 295, 306, 273, 328);
         mrMime = new Pokemon("MACHINE PROJECT 3", 284, 207, 251, 328, 372, 306);
         dialga = new Pokemon("MACHINE PROJECT 4", 404, 372, 372, 438, 328, 306);
         mewTwo = new Pokemon("FINAL PROJECT", 416, 350, 306, 447, 306, 394);
         //
-        geoffLineup = Arrays.asList(Rayquaza, porygon, entei, mrMime, dialga, mewTwo);
+        geoffLineup = Arrays.asList(rayquaza, porygon, entei, mrMime, dialga, mewTwo);
         geoffPokeCount = 0;
         geoffCurrent = geoffLineup.get(geoffPokeCount);
         //
@@ -146,7 +151,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void playerOptions() {
-        message.setText("What will \n" + userCurrent.getName() + " do?");
+        if (switchedByChoice) {
+            message.setText("You switched Pokemon!");
+        } else {
+            message.setText("What will \n" + userCurrent.getName() + " do?");
+        }
         showMessage();
         showOptions();
         fightOption.setOnClickListener(this);
@@ -214,7 +223,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
             playerOptions();
         } else {
-            Toast.makeText(this, "That staff member has fainted!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "That staff member's Pokemon has fainted!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -222,80 +231,62 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (pokemonName.equals("FLUFFY")) {
             userCurrent = eevee;
-            movelist = data.moveList("FLUFFY");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            userSprite.setImageResource(R.drawable.eevee_back); //7up
         }
         if (pokemonName.equals("GARCHOMP")) {
             userCurrent = garchomp;
-            movelist = data.moveList("GARCHOMP");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            userSprite.setImageResource(R.drawable.garchomp_back); //7up
         }
         if (pokemonName.equals("NARUTO")) {
             userCurrent = greninja;
-            movelist = data.moveList("NARUTO");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            userSprite.setImageResource(R.drawable.greninja_back); //7up
         }
         if (pokemonName.equals("VOLTORB")) {
             userCurrent = voltorb;
-            movelist = data.moveList("VOLTORB");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            userSprite.setImageResource(R.drawable.voltorb_back); //7up
         }
         if (pokemonName.equals("RAMICU")) {
             userCurrent = riolu;
-            movelist = data.moveList("RAMICU");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            userSprite.setImageResource(R.drawable.riolu_back); //7up
         }
         if (pokemonName.equals("TORTERRA")) {
             userCurrent = torterra;
-            movelist = data.moveList("TORTERRA");
-            move1.setText(data.findMove(movelist[0]));
-            move2.setText(data.findMove(movelist[1]));
-            move3.setText(data.findMove(movelist[2]));
-            move4.setText(data.findMove(movelist[3]));
+            userSprite.setImageResource(R.drawable.torterra_back); //7up
         }
+        movelist = data.moveList(userCurrent.getName());
+        move1.setText(data.findMove(movelist[0]) + "\n(" + userCurrent.getMoveOnePower() + ")");
+        move2.setText(data.findMove(movelist[1])+ "\n(" + userCurrent.getMoveTwoPower() + ")");
+        move3.setText(data.findMove(movelist[2])+ "\n(" + userCurrent.getMoveThreePower() + ")");
+        move4.setText(data.findMove(movelist[3])+ "\n(" + userCurrent.getMoveFourPower() + ")");
     }
     @Override
     public void onClick(View v) {
         boolean wasMove = false;
         final LinearLayout wholeScreen = findViewById(R.id.fightScreen);
+        movelist = data.moveList(userCurrent.getName());
         switch (v.getId()) {
             case R.id.moveTL:
                 //Move 1 selected
                 userDamage = userCurrent.getMoveOnePower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[0]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveTR:
                 //Move 2 selected
                 userDamage = userCurrent.getMoveTwoPower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[1]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveBL:
                 //Move 3 selected
                 userDamage = userCurrent.getMoveThreePower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[2]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.moveBR:
                 //Move 4 selected
                 userDamage = userCurrent.getMoveFourPower();
-                userDamageName = userDamage + " dmg";
+                userDamageName = data.findMove(movelist[3]).toUpperCase();
                 wasMove = true;
                 break;
             case R.id.fight:
@@ -343,121 +334,237 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 //push
         }
 
+        if (switchedByChoice) {
+            message.setText( "You switched to " + userCurrent.getName() + "!");
+            int geoffRandomAtk = (int) (Math.random() * 4) + 1;
+            setGeoffMoves();
+            if (geoffRandomAtk == 1) {
+                geoffDamageName = geoffMove1Name;
+                geoffDamage = geoffMove1Dmg;
+            } else if (geoffRandomAtk == 2) {
+                geoffDamageName = geoffMove2Name;
+                geoffDamage = geoffMove2Dmg;
+            } else if (geoffRandomAtk == 3) {
+                geoffDamageName = geoffMove3Name;
+                geoffDamage = geoffMove3Dmg;
+            } else if (geoffRandomAtk == 4) {
+                geoffDamageName = geoffMove4Name;
+                geoffDamage = geoffMove4Dmg;
+            }
+
+            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
+                    if (checkUserFaint()) {
+                        if (userFaintCount == 6) {
+                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    message.setText("Oh no! All your staff members have fainted!");
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            mp.stop();
+                                            defeat.start();
+                                            defeat.setLooping(true);
+                                            setContentView(R.layout.end_screen);
+                                            TextView endText = findViewById(R.id.endScreenText);
+                                            endText.setTextSize(50);
+                                            endText.setText("You lost to the 'CHALLEN'GER! Do some more PrairieLearn problems and try again!");
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
+                                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    viewFlipper.showPrevious();
+                                                    updatePokemonSelection();
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                            switchedByChoice = false;
+                        }
+                    } else {
+                        message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                        setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        playerOptions();
+                                    }
+                                });
+                            }
+                        });
+                        switchedByChoice = false;
+                    }
+                }
+            });
+        }
+
         if (wasMove) {
             geoffCurrent.setCurrentHealth(geoffCurrent.getCurrentHealth() - userDamage);
             if (checkGeoffFaint()) {
                 setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
-                message.setText(userCurrent.getName() + " used " + userDamageName + "! " + geoffCurrent.getName() + " fainted!");
+                message.setText(userCurrent.getName() + " used " + userDamageName + "! ");
                 showMessage();
                 hideOptions();
-                if (!checkUserWinner()) {
-                    geoffCurrent = geoffLineup.get(geoffPokeCount); //new Pokemon
-                    wholeScreen.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            message.setText("The 'CHALLEN'GER will now use " + geoffCurrent.getName());
-                            //7up
-                            if (geoffPokeCount == 0) {
-                                geoffSprite.setImageResource(R.drawable.rayquaza);
-                            } else if (geoffPokeCount == 1) {
-                                geoffSprite.setImageResource(R.drawable.porygon);
-                            } else if (geoffPokeCount == 2) {
-                                geoffSprite.setImageResource(R.drawable.entei);
-                            } else if (geoffPokeCount == 3) {
-                                geoffSprite.setImageResource(R.drawable.mr_mime);
-                            } else if (geoffPokeCount == 4) {
-                                geoffSprite.setImageResource(R.drawable.dialga);
-                            } else if (geoffPokeCount == 1) {
-                                geoffSprite.setImageResource(R.drawable.mewtwo);
-                            }
-                            setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        message.setText(geoffCurrent.getName() + " fainted!");
+                        if (!checkUserWinner()) {
+                            geoffCurrent = geoffLineup.get(geoffPokeCount); //new Pokemon
                             wholeScreen.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    playerOptions();
+                                    message.setText("The 'CHALLEN'GER will now use " + geoffCurrent.getName() + "!");
+                                    //7up
+                                    if (geoffPokeCount == 0) {
+                                        geoffSprite.setImageResource(R.drawable.rayquaza);
+                                    } else if (geoffPokeCount == 1) {
+                                        geoffSprite.setImageResource(R.drawable.porygon);
+                                    } else if (geoffPokeCount == 2) {
+                                        geoffSprite.setImageResource(R.drawable.entei);
+                                    } else if (geoffPokeCount == 3) {
+                                        geoffSprite.setImageResource(R.drawable.mr_mime);
+                                    } else if (geoffPokeCount == 4) {
+                                        geoffSprite.setImageResource(R.drawable.dialga);
+                                    } else if (geoffPokeCount == 1) {
+                                        geoffSprite.setImageResource(R.drawable.mewtwo);
+                                    }
+                                    setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            playerOptions();
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            //WIN CONDITION
+                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    mp.setLooping(false);
+                                    mp.stop();
+                                    victory.setLooping(true);
+                                    victory.start();
+                                    setContentView(R.layout.end_screen);
                                 }
                             });
                         }
-                    });
-                } else {
-                    //WIN CONDITION
-                    wholeScreen.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mp.setLooping(false);
-                            mp.stop();
-                            setContentView(R.layout.end_screen);
-
-                        }
-                    });
-                }
+                    }
+                });
             } else { //battle continues
                 setPokeStats(geoffFirstRow, geoffSecondRow, geoffCurrent);
                 message.setText(userCurrent.getName() + " used " + userDamageName + "!");
                 showMessage();
                 hideOptions();
-
-                int geoffRandomAtk = (int) (Math.random() * 4) + 1;
-                setGeoffMoves();
-                if (geoffRandomAtk == 1) {
-                    geoffDamageName = geoffMove1Name;
-                    geoffDamage = geoffMove1Dmg;
-                } else if (geoffRandomAtk == 2) {
-                    geoffDamageName = geoffMove2Name;
-                    geoffDamage = geoffMove2Dmg;
-                } else if (geoffRandomAtk == 3) {
-                    geoffDamageName = geoffMove3Name;
-                    geoffDamage = geoffMove3Dmg;
-                } else if (geoffRandomAtk == 4) {
-                    geoffDamageName = geoffMove4Name;
-                    geoffDamage = geoffMove4Dmg;
-                }
-
                 wholeScreen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
-                        if (checkUserFaint()) {
-                            if (userFaintCount == 6) {
-                                message.setText("Oh no! All your staff members have fainted!");
-                                wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        setContentView(R.layout.end_screen);
-                                        TextView endText = findViewById(R.id.endScreenText);
-                                        endText.setTextSize(50);
-                                        endText.setText("You lost to the 'CHALLEN'GER! Do some more PrairieLearn problems and try again!");
-                                    }
-                                });
-                            } else {
-                                setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
-                                message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
-                                final LinearLayout wholeScreen = findViewById(R.id.fightScreen);
-                                wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
+                        message.setText(geoffCurrent.getName() + " took " + userDamage + " damage!");
+                        int geoffRandomAtk = (int) (Math.random() * 4) + 1;
+                        setGeoffMoves();
+                        if (geoffRandomAtk == 1) {
+                            geoffDamageName = geoffMove1Name;
+                            geoffDamage = geoffMove1Dmg;
+                        } else if (geoffRandomAtk == 2) {
+                            geoffDamageName = geoffMove2Name;
+                            geoffDamage = geoffMove2Dmg;
+                        } else if (geoffRandomAtk == 3) {
+                            geoffDamageName = geoffMove3Name;
+                            geoffDamage = geoffMove3Dmg;
+                        } else if (geoffRandomAtk == 4) {
+                            geoffDamageName = geoffMove4Name;
+                            geoffDamage = geoffMove4Dmg;
+                        }
+
+                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                userCurrent.setCurrentHealth(userCurrent.getCurrentHealth() - geoffDamage);
+                                if (checkUserFaint()) {
+                                    if (userFaintCount == 6) {
+                                        message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
                                         wholeScreen.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                viewFlipper.showPrevious();
-                                                updatePokemonSelection();
+                                                message.setText("Oh no! All your staff members have fainted!");
+                                                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        setContentView(R.layout.end_screen);
+                                                        TextView endText = findViewById(R.id.endScreenText);
+                                                        endText.setTextSize(50);
+                                                        endText.setText("You lost to the 'CHALLEN'GER! Do some more PrairieLearn problems and try again!");
+                                                    }
+                                                });
                                             }
                                         });
-
+                                    } else {
+                                        setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                                        message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                                wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        message.setText(userCurrent.getName() + " has fainted! Choose your next staff member!");
+                                                        wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                viewFlipper.showPrevious();
+                                                                updatePokemonSelection();
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
                                     }
-                                });
-                            }
-                        } else {
-                            message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
-                            setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
-                            wholeScreen.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    playerOptions();
+                                } else {
+                                    message.setText(geoffCurrent.getName() + " used " + geoffDamageName + "!");
+                                    setPokeStats(playerFirstRow, playerSecondRow, userCurrent);
+                                    wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            message.setText(userCurrent.getName() + " took " + geoffDamage + " damage!");
+                                            wholeScreen.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    playerOptions();
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
                 });
 
@@ -566,14 +673,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      * Will eventually use the geoff.current Pokemon
      */
     private void setGeoffMoves() {
-        geoffMove1Name = "50 dmg";
-        geoffMove2Name = "100 dmg";
-        geoffMove3Name = "150 dmg";
-        geoffMove4Name = "200 dmg";
-        geoffMove1Dmg = 50;
-        geoffMove2Dmg = 100;
-        geoffMove3Dmg = 150;
-        geoffMove4Dmg = 200;
+        movelist = data.moveList(geoffCurrent.getName());
+        geoffMove1Name = data.findMove(movelist[0]).toUpperCase();
+        geoffMove2Name = data.findMove(movelist[1]).toUpperCase();
+        geoffMove3Name = data.findMove(movelist[2]).toUpperCase();
+        geoffMove4Name = data.findMove(movelist[3]).toUpperCase();
+        geoffMove1Dmg = userCurrent.getMoveOnePower();
+        geoffMove2Dmg = userCurrent.getMoveTwoPower();
+        geoffMove3Dmg = userCurrent.getMoveThreePower();
+        geoffMove4Dmg = userCurrent.getMoveFourPower();
     }
 
     /**
@@ -611,6 +719,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             mp.pause();
             isPlaying = false;
         }
+        /**
+        if (victory.isPlaying()) {
+            victory.stop();
+        }
+        if (defeat.isPlaying()) {
+            defeat.stop();
+        }
+         */
     }
 
     @Override
@@ -619,5 +735,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (!isPlaying) {
             mp.start();
         }
+        /**
+        if (!victory.isPlaying()) {
+            victory.start();
+        }
+        if (!defeat.isPlaying()) {
+            defeat.start();
+        }
+         */
     }
 }
