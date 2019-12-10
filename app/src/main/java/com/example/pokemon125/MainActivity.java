@@ -3,6 +3,7 @@ package com.example.pokemon125;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -39,19 +40,25 @@ public class MainActivity extends AppCompatActivity {
     private PokeApi pokeAPI;
     private JSONObject object;
     private JSONArray array;
-    private boolean dataReceived = false;
+    private boolean musicPlaying = true;
+    MediaPlayer mp;
+    MediaPlayer clickeffect;
+    SoundPool click;
+    private boolean alreadyStopped = false;
+
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MediaPlayer mp = new MediaPlayer();
-        mp.create(MainActivity.this, R.raw.battle_champion);
-        mp.start();
         RequestQueue queue = Volley.newRequestQueue(this);
         FrameLayout mainScreen = findViewById(R.id.mainScreenTouch);
-
+        mp = MediaPlayer.create(this, R.raw.opening_demo);
+        mp.start();
+        click = new SoundPool(1, 3, 0);
+        final int value = click.load(this, R.raw.pressing_a, 1);
+        clickeffect = MediaPlayer.create(this, R.raw.pressing_a);
         //
         String url = "https://pokeapi.co/api/v2/move?offset=0&limit=700";
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,new Response.Listener<JSONObject>() {
@@ -144,14 +151,16 @@ public class MainActivity extends AppCompatActivity {
         queue.add(stringRequest);
         mainScreen.setOnClickListener(new View.OnClickListener() { //tap anywhere on frame
             public void onClick(View v) {
+                click.play(value, 1, 1, 1, 0, 1);
                 setContentView(R.layout.exposition); //enter exposition
+                mp.stop() ;
+                alreadyStopped = true;
                 Button enterTeamSelect = findViewById(R.id.enterTeamSelect);
-
                 enterTeamSelect.setOnClickListener(new View.OnClickListener() { //tap button
                     public void onClick(View v) {
+                        click.play(value, 1, 1, 1, 0, 1);
                         setContentView(R.layout.switch_pokemon);
                         Button enterFightScene = findViewById(R.id.enterFightScreen);
-
                         enterFightScene.setOnClickListener(new View.OnClickListener() {
                            public void onClick(View v) {
                                RadioGroup radioGroup = findViewById(R.id.userPokemonList);
@@ -162,10 +171,6 @@ public class MainActivity extends AppCompatActivity {
                                Intent newIntent = new Intent(getApplicationContext(), GameActivity.class);
                                newIntent.putExtra("selectedPokemon", selectedPokemon.getText());
                                startActivity(newIntent);
-
-
-
-
                            }
                         });
                     }
@@ -206,5 +211,28 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!mp.isPlaying()) {
+            mp.setLooping(true);
+        }
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (alreadyStopped) {
+            mp.stop();
+            musicPlaying = false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!musicPlaying) {
+            mp.start();
+        }
+    }
 }
