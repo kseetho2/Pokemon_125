@@ -42,6 +42,9 @@ public class Example extends AppCompatActivity {
         moveBR.setText(move4);
         //change
     }
+    /**
+     * All move ids here should be one less than their actual ids
+     */
     public int[] moveList(String pokemonName) {
         int[] moveIds = new int[4];
         if (pokemonName.equals("FLUFFY")) {
@@ -56,6 +59,18 @@ public class Example extends AppCompatActivity {
             moveIds = new int[]{397, 156, 410, 88};
         } else if (pokemonName.equals("TORTERRA")) {
             moveIds = new int[]{275, 33, 337, 441};
+        } else if (pokemonName.equals("MACHINE PROJECT 0")) {//Rayquaza
+            moveIds = new int[]{351, 397, 43, 50};
+        } else if (pokemonName.equals("MACHINE PROJECT 1")) {//Porygon
+            moveIds = new int[]{62, 160, 59, 32};
+        } else if (pokemonName.equals("MACHINE PROJECT 2")) {//Entei
+            moveIds = new int[]{283, 325, 22, 43};
+        } else if (pokemonName.equals("MACHINE PROJECT 3")) {//Mr.Mime
+            moveIds = new int[]{93, 59, 92, 0};
+        } else if (pokemonName.equals("MACHINE PROJECT 4")) {//Dialga
+            moveIds = new int[]{458, 413, 245, 407};
+        } else if (pokemonName.equals("FINAL PROJECT")) {
+            moveIds = new int[]{92, 247, 426, 395};
         }
         return moveIds;
     }

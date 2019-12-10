@@ -21,13 +21,6 @@ import org.json.JSONObject;
  * if we don't have enough we will come up with our own.
  */
 public class Pokemon {
-    private int id;
-    private static boolean FluffyCheck = false;
-    private static boolean NarutoCheck = false;
-    private static boolean VoltorbCheck = false;
-    private static boolean RamicuCheck = false;
-    private static boolean TorterraCheck = false;
-    private static boolean GarchompCheck = false;
     //Pokemon Related Variables
     private String name;
     private int speed;
@@ -58,7 +51,7 @@ public class Pokemon {
     private int moveFourPower;
     private int moveFourAcc;
     private int moveFourPP;
-
+    // Data Retrieval Related Variables
     private static JSONObject pokeObject = new JSONObject();
     private static boolean initialSetup = false;
     private JSONObject dataFromVollyRq;
@@ -115,6 +108,36 @@ public class Pokemon {
             moveTwoId = 34; //Body-slam 34
             moveThreeId = 338; // Frenzy plant 338
             moveFourId = 442; // Iron head 442
+        } else if (input.equals("MACHINE PROJECT 0")) {
+            moveOneId = 352; // Water pulse
+            moveTwoId = 398; // Iron Tail
+            moveThreeId = 620; // Dragons Ascent
+            moveFourId = 414; // Earth Power
+        } else if (input.equals("MACHINE PROJECT 1")) {
+            moveOneId = 63; // Hyper Beam
+            moveTwoId = 161; // Tri Attack
+            moveThreeId = 60; // Psybeam
+            moveFourId = 33; // Tackle
+        } else if (input.equals("MACHINE PROJECT 2")) {
+            moveOneId = 284; // Eruption
+            moveTwoId = 326; // Extrasensory
+            moveThreeId = 23; // Stomp
+            moveFourId = 44; // Bite
+        } else if (input.equals("MACHINE PROJECT 3")) {
+            moveOneId = 94; // Psychic
+            moveTwoId = 60; // Psybeam
+            moveThreeId = 93; // Confusion
+            moveFourId = 1; // Pound
+        } else if (input.equals("MACHINE PROJECT 4")) {
+            moveOneId = 459; // Roar of Time
+            moveTwoId = 414; // Earth Power
+            moveThreeId = 246; // Ancient Power
+            moveFourId = 408; // Power Gem
+        } else if (input.equals("FINAL PROJECT")) {
+            moveOneId = 93; // Confusion
+            moveTwoId = 248; //Future Sight
+            moveThreeId = 427; // Psycho Cut
+            moveFourId = 396; // Aura-Sphere
         }
     }
 
